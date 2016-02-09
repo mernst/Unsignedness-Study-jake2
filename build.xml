@@ -17,6 +17,23 @@
 	<property name="test" location="test"/>
 	<property name="build" location="build"/>
 	<property name="dist" location="dist"/>
+	
+	<property environment="env"/>
+
+  	<property name="checkerframework" value="${env.CHECKERFRAMEWORK}" />
+
+  	<!-- On Mac/Linux, use the javac shell script; on Windows, use javac.bat -->
+  	<condition property="cfJavac" value="javac.bat" else="javac">
+      		<os family="windows" />
+  	</condition>
+
+  	<presetdef name="jsr308.javac">
+    		<javac fork="yes" executable="${checkerframework}/checker/bin/${cfJavac}" >
+      			<!-- JSR-308-related compiler arguments -->
+      			<compilerarg value="-version"/>
+      			<compilerarg value="-implicit:class"/>
+    		</javac>
+  	</presetdef>
 
 	<!-- different classpaths -->
 	<path id="build.class.path">
@@ -57,6 +74,22 @@
 			<classpath refid="build.class.path"/>
 		</javac>
 	</target>
+
+	<target name="check-unsignedness"
+          	description="Check for violations of unsigned representation"
+          	depends="clean,init">
+    		<!-- use jsr308.javac instead of javac -->
+    		<jsr308.javac destdir="${build}" optimize="off" debug="on" source="1.4">
+      			<compilerarg line="-processor unsignedness -AprintErrorStack"/>
+      			<!-- optional, to not check uses of library methods:
+                   		<compilerarg value="-AskipUses=^(java\.awt\.|javax\.swing\.)"/>
+      			-->
+      			<compilerarg line="-Xmaxerrs 10000"/>
+      			<src path="${src}"/>
+			<include name="jake2/**"/>
+			<classpath refid="build.class.path"/>
+    		</jsr308.javac>
+  	</target>
 	
 	<!-- copy resources -->
 	<target name="copyres" depends="init">
