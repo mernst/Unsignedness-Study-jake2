@@ -47,6 +47,8 @@
 		<pathelement location="lib/joal/joal.jar"/>
 		<pathelement location="lib/lwjgl/lwjgl.jar"/>
 		<pathelement location="lib/lwjgl/lwjgl_util.jar"/>
+		<pathelement location="lib/checker/checker.jar"/>
+		<pathelement location="lib/checker/javac.jar"/>
 		<pathelement location="${plugin.jar}"/>
 	</path>
 	
@@ -54,13 +56,14 @@
 	<target name="usage">
 		<echo message="command line arguments for build.sh or build.bat"/>
 		<echo message=""/>
-		<echo message="installer    build installer"/>
-		<echo message="bindist      build .tar.gz and .zip binary distribution"/>
-		<echo message="srcdist      build only source distribution"/>
-		<echo message="all          build everything"/>
-		<echo message="clean        delete classfiles keep distribution files"/>
-		<echo message="distclean    delete all generated files"/>
-		<echo message="jar          build only dist/lib/jake2.jar"/>
+		<echo message="installer    		build installer"/>
+		<echo message="bindist      		build .tar.gz and .zip binary distribution"/>
+		<echo message="srcdist      		build only source distribution"/>
+		<echo message="all          		build everything"/>
+		<echo message="clean        		delete classfiles keep distribution files"/>
+		<echo message="distclean    		delete all generated files"/>
+		<echo message="jar          		build only dist/lib/jake2.jar"/>
+		<echo message="check-unsignedness	build and run unsignedness checker"/>
 		<echo message=""/>
 	</target>
 
@@ -72,7 +75,7 @@
 
 	<!-- compile -->
 	<target name="compile" depends="init">
-		<javac destdir="${build}" optimize="off" debug="on" source="1.4">
+		<javac destdir="${build}" optimize="off" debug="on">
 			<src path="${src}"/>
 			<include name="jake2/**"/>
 			<classpath refid="build.class.path"/>
