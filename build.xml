@@ -47,8 +47,7 @@
 		<pathelement location="lib/joal/joal.jar"/>
 		<pathelement location="lib/lwjgl/lwjgl.jar"/>
 		<pathelement location="lib/lwjgl/lwjgl_util.jar"/>
-		<pathelement location="lib/checker/checker.jar"/>
-		<pathelement location="lib/checker/javac.jar"/>
+		<pathelement location="${env.CHECKERFRAMEWORK}/checker/dist/checker.jar"/>
 		<pathelement location="${plugin.jar}"/>
 	</path>
 	
