@@ -26,6 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 package jake2.qcommon;
 
 import jake2.Defines;
+import org.checkerframework.checker.unsignedness.qual.Unsigned;
 
 import java.nio.*;
 
@@ -65,13 +66,13 @@ public class qfiles {
 		public byte version;
 		public byte encoding;
 		public byte bits_per_pixel;
-		public int xmin, ymin, xmax, ymax; // unsigned short
-		public int hres, vres; // unsigned short
-		public byte[] palette; //unsigned byte; size 48
+		@Unsigned public int xmin, ymin, xmax, ymax; // unsigned short
+		@Unsigned public int hres, vres; // unsigned short
+		@Unsigned public byte[] palette; //unsigned byte; size 48
 		public byte reserved;
 		public byte color_planes;
-		public int bytes_per_line; // unsigned short
-		public int palette_type; // unsigned short
+		@Unsigned public int bytes_per_line; // unsigned short
+		@Unsigned public int palette_type; // unsigned short
 		public byte[] filler; // size 58
 		public ByteBuffer data; //unbounded data
 
@@ -116,11 +117,11 @@ public class qfiles {
 	public static class tga_t {
 		
 		// targa header
-		public int id_length, colormap_type, image_type; // unsigned char
-		public int colormap_index, colormap_length; // unsigned short
-		public int colormap_size; // unsigned char
-		public int x_origin, y_origin, width, height; // unsigned short
-		public int pixel_size, attributes; // unsigned char
+		@Unsigned public int id_length, colormap_type, image_type; // unsigned char
+		@Unsigned public int colormap_index, colormap_length; // unsigned short
+		@Unsigned public int colormap_size; // unsigned char
+		@Unsigned public int x_origin, y_origin, width, height; // unsigned short
+		@Unsigned public int pixel_size, attributes; // unsigned char
 
 		public ByteBuffer data; // (un)compressed data
 
@@ -503,8 +504,8 @@ public class qfiles {
 		unsigned short	numfaces;	// counting both sides
 		*/
 
-		public int firstface;
-		public int numfaces;
+		@Unsigned public int firstface;
+		@Unsigned public int numfaces;
 
 		public static int SIZE = 4 + 8 + 6 + 6 + 2 + 2; // counting both sides
 	}
@@ -516,7 +517,7 @@ public class qfiles {
 	
 	public static class dedge_t {
 		// unsigned short v[2];
-		int v[] = { 0, 0 };
+		@Unsigned int v[] = { 0, 0 };
 	}
 	
 	public static class dface_t {
@@ -527,7 +528,7 @@ public class qfiles {
 			+	Defines.MAXLIGHTMAPS;
 
 		//unsigned short	planenum;
-		public int planenum;
+		@Unsigned public int planenum;
 		public short side;
 
 		public int firstedge; // we must support > 64k edges
@@ -586,11 +587,11 @@ public class qfiles {
 		public short mins[] = { 0, 0, 0 }; // for frustum culling
 		public short maxs[] = { 0, 0, 0 };
 
-		public int firstleafface; // unsigned short
-		public int numleaffaces; // unsigned short
+		@Unsigned public int firstleafface; // unsigned short
+		@Unsigned public int numleaffaces; // unsigned short
 
-		public int firstleafbrush; // unsigned short
-		public int numleafbrushes; // unsigned short
+		@Unsigned public int firstleafbrush; // unsigned short
+		@Unsigned public int numleafbrushes; // unsigned short
 	}
 	
 	public static class dbrushside_t {
@@ -603,7 +604,7 @@ public class qfiles {
 		}
 
 		//unsigned short planenum;
-		int planenum; // facing out of the leaf
+		@Unsigned int planenum; // facing out of the leaf
 
 		short texinfo;
 

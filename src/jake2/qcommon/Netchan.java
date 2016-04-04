@@ -30,6 +30,7 @@ import jake2.server.SV_MAIN;
 import jake2.sys.NET;
 import jake2.sys.Timer;
 import jake2.util.Lib;
+import org.checkerframework.checker.unsignedness.qual.Unsigned;
 
 /**
  * Netchan
@@ -276,8 +277,8 @@ public final class Netchan extends SV_MAIN {
             MSG.ReadShort(msg);
 
         // achtung unsigned int
-        int reliable_message = sequence >>> 31;
-        int reliable_ack = sequence_ack >>> 31;
+        @Unsigned int reliable_message = sequence >>> 31;
+        @Unsigned int reliable_ack = sequence_ack >>> 31;
 
         sequence &= ~(1 << 31);
         sequence_ack &= ~(1 << 31);

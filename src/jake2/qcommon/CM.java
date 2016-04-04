@@ -25,6 +25,7 @@ import jake2.Defines;
 import jake2.Globals;
 import jake2.game.*;
 import jake2.util.*;
+import org.checkerframework.checker.unsignedness.qual.Unsigned;
 
 import java.io.RandomAccessFile;
 import java.nio.*;
@@ -52,10 +53,10 @@ public class CM {
         int area;
 
         // was unsigned short, but is ok (rst)
-        short firstleafbrush;
+        @Unsigned short firstleafbrush;
 
         // was unsigned short, but is ok (rst)
-        short numleafbrushes;
+        @Unsigned short numleafbrushes;
     }
 
     public static class cbrush_t {

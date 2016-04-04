@@ -33,6 +33,7 @@ import jake2.game.Cmd;
 import jake2.server.SV_MAIN;
 import jake2.sys.Sys;
 import jake2.util.*;
+import org.checkerframework.checker.unsignedness.qual.Unsigned;
 
 import java.io.*;
 
@@ -707,7 +708,7 @@ public final class Com
 		length += 4;
 
 		// unsigned short
-		int crc = CRC.CRC_Block(chkb, length);
+		@Unsigned int crc = CRC.CRC_Block(chkb, length);
 
 		int x = 0;
 		for (int n=0; n < length; n++)

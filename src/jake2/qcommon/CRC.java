@@ -22,6 +22,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 package jake2.qcommon;
 
+import org.checkerframework.checker.unsignedness.qual.Unsigned;
+
 public class CRC
 {
 
@@ -64,7 +66,7 @@ public class CRC
 
 	static int CRC_Block(byte start[], int count)
 	{
-		short crc= CRC_INIT_VALUE;
+		@Unsigned short crc= CRC_INIT_VALUE;
 
 		int ndx= 0;
 

@@ -25,6 +25,7 @@ package jake2.qcommon;
 
 
 import jake2.*;
+import org.checkerframework.checker.unsignedness.qual.Unsigned;
 // import jake2.client.*;
 // import jake2.game.*;
 // import jake2.qcommon.*;
@@ -38,7 +39,7 @@ public class miptex_t {
 	int		width, height;
 	
 	//unsigned	offsets[MIPLEVELS];		// four mip maps stored
-	int		offsets[] = new int[Defines.MIPLEVELS];		// four mip maps stored
+	@Unsigned int		offsets[] = new int[Defines.MIPLEVELS];		// four mip maps stored
 	
 	//char		animname[32];			// next frame in animation chain
 	String 		animframe="";
