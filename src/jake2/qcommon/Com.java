@@ -708,7 +708,7 @@ public final class Com
 		length += 4;
 
 		// unsigned short
-		@Unsigned int crc = CRC.CRC_Block(chkb, length);
+		@Unsigned short crc = CRC.CRC_Block(chkb, length);
 
 		int x = 0;
 		for (int n=0; n < length; n++)

@@ -64,7 +64,7 @@ public class CRC
             0xbfba, 0x8fd9, 0x9ff8, 0x6e17, 0x7e36, 0x4e55, 0x5e74, 0x2e93,
             0x3eb2, 0x0ed1, 0x1ef0 };
 
-	static int CRC_Block(byte start[], int count)
+	static @Unsigned short CRC_Block(byte start[], int count)
 	{
 		@Unsigned short crc= CRC_INIT_VALUE;
 
@@ -74,7 +74,7 @@ public class CRC
 			crc= (short) ((crc << 8) ^ crctable[0xff & ((crc >> 8) ^ start[ndx++])]);
 
 		// unsigned short
-		return crc & 0xFFFF;
+		return crc;
 	}
 
 	public static void main(String[] args)

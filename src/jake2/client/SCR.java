@@ -1405,8 +1405,8 @@ public final class SCR extends Globals {
         pcx = new qfiles.pcx_t(raw);
 
         if (pcx.manufacturer != 0x0a || pcx.version != 5 || pcx.encoding != 1
-                || pcx.bits_per_pixel != 8 || pcx.xmax >= 640
-                || pcx.ymax >= 480) {
+                || pcx.bits_per_pixel != 8 || Globals.compareUnsignedShorts(pcx.xmax, (short) 640) >= 0
+                || Globals.compareUnsignedShorts(pcx.ymax, (short) 480) >= 0) {
 
             VID.Printf(Defines.PRINT_ALL, "Bad pcx file " + filename + '\n');
             return 0;
