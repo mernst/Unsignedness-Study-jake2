@@ -25,12 +25,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 package jake2.client;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 /**
  * kbutton_t
  */
 public class kbutton_t {
 	int[] down = new int[2];	// key nums holding it down
-	long downtime;				// msec timestamp
-	long msec;					// msec down this frame
+	@Unsigned int downtime;				// msec timestamp
+	@Unsigned int msec;					// msec down this frame
 	public int state;
 }

@@ -35,6 +35,8 @@ import java.nio.ByteOrder;
 import java.nio.channels.FileChannel;
 import java.util.*;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 /**
  * FS
  * 
@@ -766,7 +768,7 @@ public final class FS extends Globals {
     /*
      * ListFiles
      */
-    public static String[] ListFiles(String findname, int musthave, int canthave) {
+    public static String[] ListFiles(String findname, @Unsigned int musthave, @Unsigned int canthave) {
         String[] list = null;
 
         File[] files = Sys.FindAll(findname, musthave, canthave);

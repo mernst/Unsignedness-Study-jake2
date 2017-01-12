@@ -26,6 +26,8 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.security.MessageDigest;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 
 public class MD4 extends MessageDigest implements Cloneable {
 	// MD4 specific object variables
@@ -291,7 +293,7 @@ public class MD4 extends MessageDigest implements Cloneable {
 	/**
 	 * Bugfixed, now works prima (RST).
 	 */
-	public static int Com_BlockChecksum(byte[] buffer, int length) {
+	@Unsigned public static int Com_BlockChecksum(byte[] buffer, int length) {
 		
 		int val;
 		MD4 md4 = new MD4();

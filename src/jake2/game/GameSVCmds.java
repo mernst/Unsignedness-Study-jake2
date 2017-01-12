@@ -31,6 +31,8 @@ import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.util.StringTokenizer;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 public class GameSVCmds {
 
     /**
@@ -67,9 +69,9 @@ public class GameSVCmds {
      */
 
     public static class ipfilter_t {
-        int mask;
+        @Unsigned int mask;
 
-        int compare;
+        @Unsigned int compare;
     };
 
     public static void Svcmd_Test_f() {
@@ -119,7 +121,7 @@ public class GameSVCmds {
      */
     static boolean SV_FilterPacket(String from) {
         int i;
-        int in;
+        @Unsigned int in;
         int m[] = { 0, 0, 0, 0 };
 
         int p = 0;

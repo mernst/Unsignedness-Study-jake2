@@ -39,6 +39,8 @@ import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 /**
  * CL
  */
@@ -543,7 +545,7 @@ public final class CL {
             // Yet another hack to let old demos work the old precache sequence.
             if (Cmd.Argc() < 2) {
 
-                int iw[] = { 0 }; // for detecting cheater maps
+                @Unsigned int iw[] = { 0 }; // for detecting cheater maps
 
                 CM.CM_LoadMap(Globals.cl.configstrings[Defines.CS_MODELS + 1],
                         true, iw);
@@ -918,7 +920,7 @@ public final class CL {
     }
 
     public static void RequestNextDownload() {
-        int map_checksum = 0; // for detecting cheater maps
+        @Unsigned int map_checksum = 0; // for detecting cheater maps
         //char fn[MAX_OSPATH];
         String fn;
 

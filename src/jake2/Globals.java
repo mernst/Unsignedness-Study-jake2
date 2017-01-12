@@ -36,6 +36,8 @@ import java.io.FileWriter;
 import java.io.RandomAccessFile;
 import java.util.Random;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 /**
  * Globals ist the collection of global variables and constants.
  * It is more elegant to use these vars by inheritance to separate 
@@ -370,7 +372,7 @@ public class Globals extends Defines {
 
 	public static cvar_t crosshair;
 	public static vrect_t scr_vrect = new vrect_t();
-	public static int sys_frame_time;
+	@Unsigned public static int sys_frame_time;
 	public static int chat_bufferlen = 0;
 	public static int gun_frame;
 	public static model_t gun_model;

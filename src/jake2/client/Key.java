@@ -35,6 +35,8 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Vector;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 /**
  * Key
  */
@@ -287,7 +289,7 @@ public class Key extends Globals {
 	/**
 	 * Called by the system between frames for both key up and key down events.
 	 */
-	public static void Event(int key, boolean down, int time) {		
+	public static void Event(int key, boolean down, @Unsigned int time) {
 		String kb;
 		String cmd;
 

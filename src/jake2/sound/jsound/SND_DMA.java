@@ -46,6 +46,8 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 /**
  * SND_DMA TODO implement sound system
  */
@@ -701,7 +703,7 @@ public class SND_DMA extends SND_MIX {
         if (timeofs == 0.0f)
             ps.begin = paintedtime;
         else
-            ps.begin = (long) (start + timeofs * dma.speed);
+            ps.begin = (int) (start + timeofs * dma.speed);
 
         // sort into the pending sound list
         playsound_t sort;
@@ -1065,7 +1067,7 @@ public class SND_DMA extends SND_MIX {
     }
 
     static void Update_() {
-        int endtime;
+        @Unsigned int endtime;
         int samps;
 
         if (!sound_started)

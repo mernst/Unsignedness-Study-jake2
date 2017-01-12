@@ -36,6 +36,8 @@ import jake2.util.*;
 
 import java.io.*;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 /**
  * Com
  *
@@ -707,7 +709,7 @@ public final class Com
 		length += 4;
 
 		// unsigned short
-		int crc = CRC.CRC_Block(chkb, length);
+		@Unsigned short crc = CRC.CRC_Block(chkb, length);
 
 		int x = 0;
 		for (int n=0; n < length; n++)

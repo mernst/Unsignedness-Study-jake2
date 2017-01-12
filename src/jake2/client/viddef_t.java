@@ -21,11 +21,13 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 // Created on 20.11.2003 by RST.
 package jake2.client;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 public class viddef_t {
-    private int width;
-    private int height;
-    private int newWidth;
-    private int newHeight;
+    @Unsigned private int width;
+    @Unsigned private int height;
+    @Unsigned private int newWidth;
+    @Unsigned private int newHeight;
 
     /**
      * This method hasn't an effect on <code>width</code> and <code>height</code>

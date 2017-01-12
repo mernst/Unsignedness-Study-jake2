@@ -35,6 +35,8 @@ import java.nio.ByteOrder;
 import java.nio.IntBuffer;
 import java.util.Arrays;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 /**
  * Surf
  *  
@@ -683,7 +685,7 @@ public abstract class Surf extends Draw {
 		int map;
 		image_t image = R_TextureAnimation( surf.texinfo );
 		boolean is_dynamic = false;
-		int lmtex = surf.lightmaptexturenum;
+		@Unsigned int lmtex = surf.lightmaptexturenum;
 		glpoly_t p;
 
 		// ersetzt goto

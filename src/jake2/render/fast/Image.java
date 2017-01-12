@@ -40,6 +40,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 /**
  * Image
  * 
@@ -55,7 +57,7 @@ public abstract class Image extends Main {
 	int base_textureid; // gltextures[i] = base_textureid+i
 
 	byte[] intensitytable = new byte[256];
-	byte[] gammatable = new byte[256];
+	@Unsigned byte[] gammatable = new byte[256];
 
 	cvar_t intensity;
 
@@ -82,7 +84,7 @@ public abstract class Image extends Main {
 		numgltextures = 0;
 	}
 
-	void GL_SetTexturePalette(int[] palette) {
+	void GL_SetTexturePalette(@Unsigned int[] palette) {
 
 		assert(palette != null && palette.length == 256) : "int palette[256] bug";
 
@@ -567,9 +569,9 @@ public abstract class Image extends Main {
 		
 		buf_p = targa_header.data;
 			
-		byte red,green,blue,alphabyte;
+		@Unsigned byte red,green,blue,alphabyte;
 		red = green = blue = alphabyte = 0;
-		int packetHeader, packetSize, j;
+		@Unsigned int packetHeader, packetSize, j;
 		
 		if (targa_header.image_type==2) {  // Uncompressed, RGB images
 			for(row=rows-1; row>=0; row--) {
@@ -855,22 +857,22 @@ public abstract class Image extends Main {
 
 	// ==================================================
 
-    final int[] p1 = new int[1024];
-    final int[] p2 = new int[1024];
+    @Unsigned final int[] p1 = new int[1024];
+    @Unsigned final int[] p2 = new int[1024];
 
     /*
      * GL_ResampleTexture
      */
-    void GL_ResampleTexture(int[] in, int inwidth, int inheight, int[] out,
+    void GL_ResampleTexture(@Unsigned int[] in, int inwidth, int inheight, @Unsigned int[] out,
 	    int outwidth, int outheight) {
 
 	Arrays.fill(p1, 0);
 	Arrays.fill(p2, 0);
 
-	int fracstep = (inwidth * 0x10000) / outwidth;
+	@Unsigned int fracstep = (inwidth * 0x10000) / outwidth;
 
 	int i, j;
-	int frac = fracstep >> 2;
+	@Unsigned int frac = fracstep >> 2;
 	for (i = 0; i < outwidth; i++) {
 	    p1[i] = frac >> 16;
 	    frac += fracstep;
@@ -883,7 +885,7 @@ public abstract class Image extends Main {
 
 	int outp = 0;
 	int r, g, b, a;
-	int inrow, inrow2;
+	@Unsigned int inrow, inrow2;
 	int pix1, pix2, pix3, pix4;
 
 	for (i = 0; i < outheight; i++) {
@@ -918,7 +920,7 @@ public abstract class Image extends Main {
 	lighting range
 	================
 	*/
-	void GL_LightScaleTexture(int[] in, int inwidth, int inheight, boolean only_gamma) {
+	void GL_LightScaleTexture(@Unsigned int[] in, int inwidth, int inheight, boolean only_gamma) {
 		if (only_gamma) {
 			int i, c;
 			int r, g, b, color;
@@ -1002,9 +1004,9 @@ public abstract class Image extends Main {
 	Returns has_alpha
 	===============
 	*/
-	void GL_BuildPalettedTexture(ByteBuffer paletted_texture, int[] scaled, int scaled_width, int scaled_height) {
+	void GL_BuildPalettedTexture(ByteBuffer paletted_texture, @Unsigned int[] scaled, int scaled_width, int scaled_height) {
 
-		int r, g, b, c;
+		@Unsigned int r, g, b, c;
 		int size = scaled_width * scaled_height;
 
 		for (int i = 0; i < size; i++) {
@@ -1029,12 +1031,12 @@ public abstract class Image extends Main {
 	Returns has_alpha
 	===============
 	*/
-	int[] scaled = new int[256 * 256];
+	@Unsigned int[] scaled = new int[256 * 256];
 	//byte[] paletted_texture = new byte[256 * 256];
 	ByteBuffer paletted_texture = Lib.newByteBuffer(256*256);
 	IntBuffer tex = Lib.newIntBuffer(512 * 256, ByteOrder.LITTLE_ENDIAN);
 
-	boolean GL_Upload32(int[] data, int width, int height, boolean mipmap) {
+	boolean GL_Upload32(@Unsigned int[] data, int width, int height, boolean mipmap) {
 		int samples;
 		int scaled_width, scaled_height;
 		int i, c;
@@ -1226,7 +1228,7 @@ public abstract class Image extends Main {
 	===============
 	*/
 
-	int[] trans = new int[512 * 256];
+	@Unsigned int[] trans = new int[512 * 256];
 
 	boolean GL_Upload8(byte[] data, int width, int height, boolean mipmap, boolean is_sky) {
 		

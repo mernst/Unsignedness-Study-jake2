@@ -31,6 +31,8 @@ import jake2.sys.NET;
 import jake2.sys.Timer;
 import jake2.util.Lib;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 /**
  * Netchan
  */
@@ -192,7 +194,7 @@ public final class Netchan extends SV_MAIN {
      */
     public static void Transmit(netchan_t chan, int length, byte data[]) {
         int send_reliable;
-        int w1, w2;
+        @Unsigned int w1, w2;
 
         // check for message overflow
         if (chan.message.overflowed) {
@@ -268,16 +270,16 @@ public final class Netchan extends SV_MAIN {
     public static boolean Process(netchan_t chan, sizebuf_t msg) {
         // get sequence numbers
         MSG.BeginReading(msg);
-        int sequence = MSG.ReadLong(msg);
-        int sequence_ack = MSG.ReadLong(msg);
+        @Unsigned int sequence = MSG.ReadLong(msg);
+        @Unsigned int sequence_ack = MSG.ReadLong(msg);
 
         // read the qport if we are a server
         if (chan.sock == Defines.NS_SERVER)
             MSG.ReadShort(msg);
 
         // achtung unsigned int
-        int reliable_message = sequence >>> 31;
-        int reliable_ack = sequence_ack >>> 31;
+        @Unsigned int reliable_message = sequence >>> 31;
+        @Unsigned int reliable_ack = sequence_ack >>> 31;
 
         sequence &= ~(1 << 31);
         sequence_ack &= ~(1 << 31);

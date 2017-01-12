@@ -27,6 +27,8 @@ import jake2.util.QuakeFile;
 
 import java.io.IOException;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 public class entity_state_t implements Cloneable
 {
 	/** entity_state_t is the information conveyed from the server
@@ -54,7 +56,7 @@ public class entity_state_t implements Cloneable
 	public int frame;
 	public int skinnum;
 	/** PGM - we're filling it, so it needs to be unsigned. */
-	public int effects; 
+	@Unsigned public int effects;
 	public int renderfx;
 	public int solid;
 	// for client side prediction, 8*(bits 0-4) is x/y radius

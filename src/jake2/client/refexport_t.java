@@ -34,6 +34,8 @@ import jake2.sys.KBD;
 import java.awt.Dimension;
 import java.awt.DisplayMode;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 /**
  * refexport_t
  * 
@@ -93,7 +95,7 @@ public interface refexport_t {
 	** video mode and refresh state management entry points
 	*/
 	/* 256 r,g,b values;	null = game palette, size = 768 bytes */
-	void CinematicSetPalette(final byte[] palette);
+	void CinematicSetPalette(final @Unsigned byte[] palette);
 	void BeginFrame(float camera_separation);
 	void EndFrame();
 

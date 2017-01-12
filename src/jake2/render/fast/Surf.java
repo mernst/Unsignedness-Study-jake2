@@ -36,6 +36,8 @@ import jake2.util.Math3D;
 import java.nio.*;
 import java.util.Arrays;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 /**
  * Surf
  *  
@@ -435,7 +437,7 @@ public abstract class Surf extends Draw {
 
 		glpoly_t p;
 		image_t image = R_TextureAnimation( surf.texinfo );
-		int lmtex = surf.lightmaptexturenum;
+		@Unsigned int lmtex = surf.lightmaptexturenum;
 
 		if ( is_dynamic )
 		{

@@ -14,6 +14,7 @@ import jake2.client.refdef_t;
 import jake2.client.refexport_t;
 import jake2.qcommon.xcommand_t;
 import jake2.sys.KBD;
+import org.checkerframework.checker.signedness.qual.Unsigned;
 
 /**
  * DummyRenderer
@@ -131,7 +132,7 @@ public class DummyRenderer implements refexport_t {
 	/* (non-Javadoc)
 	 * @see jake2.client.refexport_t#CinematicSetPalette(byte[])
 	 */
-	public void CinematicSetPalette(byte[] palette) {
+	public void CinematicSetPalette(@Unsigned byte[] palette) {
 	}
 
 	/* (non-Javadoc)

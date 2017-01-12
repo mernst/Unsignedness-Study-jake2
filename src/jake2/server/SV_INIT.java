@@ -31,6 +31,7 @@ import jake2.qcommon.*;
 import jake2.sys.NET;
 import jake2.util.Lib;
 import jake2.util.Math3D;
+import org.checkerframework.checker.signedness.qual.Unsigned;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -173,7 +174,7 @@ public class SV_INIT {
     public static void SV_SpawnServer(String server, String spawnpoint,
             int serverstate, boolean attractloop, boolean loadgame) {
         int i;
-        int checksum = 0;
+        @Unsigned int checksum = 0;
 
         if (attractloop)
             Cvar.Set("paused", "0");

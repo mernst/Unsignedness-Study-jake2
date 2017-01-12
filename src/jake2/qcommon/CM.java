@@ -30,6 +30,8 @@ import java.io.RandomAccessFile;
 import java.nio.*;
 import java.util.Arrays;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 public class CM {
 
     public static class cnode_t {
@@ -52,10 +54,10 @@ public class CM {
         int area;
 
         // was unsigned short, but is ok (rst)
-        short firstleafbrush;
+        @Unsigned short firstleafbrush;
 
         // was unsigned short, but is ok (rst)
-        short numleafbrushes;
+        @Unsigned short numleafbrushes;
     }
 
     public static class cbrush_t {
@@ -130,7 +132,7 @@ public class CM {
 
     static int numleafbrushes;
 
-    public static int map_leafbrushes[] = new int[Defines.MAX_MAP_LEAFBRUSHES];
+    @Unsigned public static short map_leafbrushes[] = new short[Defines.MAX_MAP_LEAFBRUSHES];
 
     public static int numcmodels;
 
@@ -195,15 +197,15 @@ public class CM {
 
     public static int checksum;
 
-    public static int last_checksum;
+    @Unsigned public static int last_checksum;
 
     /** 
      * Loads in the map and all submodels.
      */
     public static cmodel_t CM_LoadMap(String name, boolean clientload,
-            int checksum[]) {
+            @Unsigned int checksum[]) {
         Com.DPrintf("CM_LoadMap(" + name + ")...\n");
-        byte buf[];
+        @Unsigned byte buf[];
         qfiles.dheader_t header;
         int length;
 
@@ -598,7 +600,7 @@ public class CM {
         if (count > Defines.MAX_MAP_LEAFBRUSHES)
             Com.Error(Defines.ERR_DROP, "Map has too many leafbrushes");
 
-        int[] out = map_leafbrushes;
+        @Unsigned short[] out = map_leafbrushes;
         numleafbrushes = count;
 
         ByteBuffer bb = ByteBuffer.wrap(cmod_base, l.fileofs, count * 2).order(
@@ -867,7 +869,7 @@ public class CM {
         box_leaf.firstleafbrush = (short) numleafbrushes;
         box_leaf.numleafbrushes = 1;
 
-        map_leafbrushes[numleafbrushes] = numbrushes;
+        map_leafbrushes[numleafbrushes] = (short) numbrushes;
 
         int side;
         cnode_t c;
