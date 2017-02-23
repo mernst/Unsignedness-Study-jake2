@@ -111,7 +111,7 @@ public class client_state_t {
 	
 	int cinematictime; // cls.realtime for first cinematic frame
 	int cinematicframe;
-	byte cinematicpalette[] = new byte[768];
+	@Unsigned byte cinematicpalette[] = new byte[768];
 	public boolean cinematicpalette_active;
 
 	//

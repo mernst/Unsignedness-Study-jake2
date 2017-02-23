@@ -23,6 +23,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 package jake2.client;
 
+import org.checkerframework.checker.signedness.qual.Unsigned;
+
 public class refdef_t {
 	public int		x, y, width, height;// in virtual screen coordinates
 	public float		fov_x, fov_y;
@@ -32,7 +34,7 @@ public class refdef_t {
 	public float		time;				// time is uesed to auto animate
 	public int		rdflags;			// RDF_UNDERWATER, etc
 
-	public byte		areabits[];			// if not NULL, only areas with set bits will be drawn
+	@Unsigned public byte		areabits[];			// if not NULL, only areas with set bits will be drawn
 
 	public lightstyle_t	lightstyles[];	// [MAX_LIGHTSTYLES]
 

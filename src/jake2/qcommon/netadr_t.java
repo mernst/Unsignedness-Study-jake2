@@ -34,9 +34,9 @@ public class netadr_t {
 
     public int type;
 
-    @Unsigned public short port;
+    @Unsigned public int port;
 
-    public byte ip[];
+    @Unsigned public byte ip[];
 
     public netadr_t() {
         this.type = Defines.NA_LOOPBACK;

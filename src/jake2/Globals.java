@@ -115,14 +115,14 @@ public class Globals extends Defines {
 
 	public static sizebuf_t cmd_text = new sizebuf_t();
 
-	public static byte defer_text_buf[] = new byte[8192];
+	@Unsigned public static byte defer_text_buf[] = new byte[8192];
 
-	public static byte cmd_text_buf[] = new byte[8192];
+	@Unsigned public static byte cmd_text_buf[] = new byte[8192];
 	public static cmdalias_t cmd_alias;
 
 	//=============================================================================
 
-	public static byte[] net_message_buffer = new byte[MAX_MSGLEN];
+	@Unsigned public static byte[] net_message_buffer = new byte[MAX_MSGLEN];
 
 	public static int time_before_game;
 	public static int time_after_game;

@@ -102,7 +102,7 @@ public abstract class Surf extends Draw {
 //
 
 	// Model.java
-	abstract byte[] Mod_ClusterPVS(int cluster, model_t model);
+	@Unsigned abstract byte[] Mod_ClusterPVS(int cluster, model_t model);
 	// Warp.java
 	abstract void R_DrawSkyBox();
 	abstract void R_AddSkySurface(msurface_t surface);
@@ -1240,7 +1240,7 @@ public abstract class Surf extends Draw {
 	*/
 	void R_MarkLeaves()
 	{
-		byte[] vis;
+		@Unsigned byte[] vis;
 		//byte[] fatvis = new byte[Defines.MAX_MAP_LEAFS / 8];
 		
 		Arrays.fill(fatvis, (byte)0);

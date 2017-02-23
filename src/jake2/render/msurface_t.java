@@ -24,6 +24,7 @@ package jake2.render;
 
 import jake2.Defines;
 import jake2.game.cplane_t;
+import org.checkerframework.checker.signedness.qual.Unsigned;
 
 import java.nio.ByteBuffer;
 
@@ -57,7 +58,7 @@ public class msurface_t
 	public int dlightbits;
 
 	public int lightmaptexturenum;
-	public byte styles[] = new byte[Defines.MAXLIGHTMAPS];
+	@Unsigned public byte styles[] = new byte[Defines.MAXLIGHTMAPS];
 	public float cached_light[] = new float[Defines.MAXLIGHTMAPS];
 	// values currently used in lightmap
 	//public byte samples[]; // [numstyles*surfsize]

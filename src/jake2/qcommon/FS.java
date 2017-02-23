@@ -353,7 +353,7 @@ public final class FS extends Globals {
     public static byte[] LoadFile(String path) {
         RandomAccessFile file;
 
-        byte[] buf = null;
+        @Unsigned byte[] buf = null;
         int len = 0;
 
         // TODO hack for bad strings (fuck \0)

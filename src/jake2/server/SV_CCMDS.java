@@ -46,6 +46,7 @@ import jake2.sys.Sys;
 import jake2.util.Lib;
 import jake2.util.QuakeFile;
 import jake2.util.Vargs;
+import org.checkerframework.checker.signedness.qual.Unsigned;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -212,7 +213,7 @@ public class SV_CCMDS {
 	public static void CopyFile(String src, String dst) {
 		RandomAccessFile f1, f2;
 		int l = -1;
-		byte buffer[] = new byte[65536];
+		@Unsigned byte buffer[] = new byte[65536];
 
 		//Com.DPrintf("CopyFile (" + src + ", " + dst + ")\n");
 		try {

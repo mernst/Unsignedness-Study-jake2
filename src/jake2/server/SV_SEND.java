@@ -29,6 +29,7 @@ import jake2.game.edict_t;
 import jake2.qcommon.*;
 import jake2.util.Lib;
 import jake2.util.Math3D;
+import org.checkerframework.checker.signedness.qual.Unsigned;
 
 import java.io.IOException;
 
@@ -136,7 +137,7 @@ public class SV_SEND {
 	*/
 	public static void SV_Multicast(float[] origin, int to) {
 		client_t client;
-		byte mask[];
+		@Unsigned byte mask[];
 		int leafnum, cluster;
 		int j;
 		boolean reliable;

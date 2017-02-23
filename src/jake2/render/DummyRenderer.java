@@ -126,7 +126,7 @@ public class DummyRenderer implements refexport_t {
 	/* (non-Javadoc)
 	 * @see jake2.client.refexport_t#DrawStretchRaw(int, int, int, int, int, int, byte[])
 	 */
-	public void DrawStretchRaw(int x, int y, int w, int h, int cols, int rows, byte[] data) {
+	public void DrawStretchRaw(int x, int y, int w, int h, int cols, int rows, @Unsigned byte[] data) {
 	}
 
 	/* (non-Javadoc)

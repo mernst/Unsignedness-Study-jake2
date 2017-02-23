@@ -54,7 +54,7 @@ public final class CL {
 
     static int precache_model_skin;
 
-    static byte precache_model[]; // used for skin checking in alias models
+    static @Unsigned byte precache_model[]; // used for skin checking in alias models
 
     public static final int PLAYER_MULT = 5;
 

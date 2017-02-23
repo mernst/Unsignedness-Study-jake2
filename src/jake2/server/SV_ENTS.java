@@ -26,6 +26,7 @@ import jake2.Defines;
 import jake2.game.*;
 import jake2.qcommon.*;
 import jake2.util.Math3D;
+import org.checkerframework.checker.signedness.qual.Unsigned;
 
 import java.io.IOException;
 
@@ -39,7 +40,7 @@ public class SV_ENTS {
      * =============================================================================
      */
 
-    public static byte fatpvs[] = new byte[65536 / 8]; // 32767 is MAX_MAP_LEAFS
+    @Unsigned public static byte fatpvs[] = new byte[65536 / 8]; // 32767 is MAX_MAP_LEAFS
 
     /*
      * =============================================================================
@@ -352,7 +353,7 @@ public class SV_ENTS {
         int leafs[] = new int[64];
         int i, j, count;
         int longs;
-        byte src[];
+        @Unsigned byte src[];
         float[] mins = { 0, 0, 0 }, maxs = { 0, 0, 0 };
 
         for (i = 0; i < 3; i++) {
@@ -410,8 +411,8 @@ public class SV_ENTS {
         int clientarea, clientcluster;
         int leafnum;
         int c_fullsend;
-        byte clientphs[];
-        byte bitvector[];
+        @Unsigned byte clientphs[];
+        @Unsigned byte bitvector[];
 
         clent = client.edict;
         if (clent.client == null)

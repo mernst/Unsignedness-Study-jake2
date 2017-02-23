@@ -487,7 +487,7 @@ public final class Com
 	/**
 	 * CRC table. 
 	 */
-	static byte chktbl[] = { (byte) 0x84, (byte) 0x47, (byte) 0x51, (byte) 0xc1,
+	@Unsigned static byte chktbl[] = { (byte) 0x84, (byte) 0x47, (byte) 0x51, (byte) 0xc1,
             (byte) 0x93, (byte) 0x22, (byte) 0x21, (byte) 0x24, (byte) 0x2f,
             (byte) 0x66, (byte) 0x60, (byte) 0x4d, (byte) 0xb0, (byte) 0x7c,
             (byte) 0xda, (byte) 0x88, (byte) 0x54, (byte) 0x15, (byte) 0x2b,
@@ -684,12 +684,12 @@ public final class Com
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0 };
 	
-	static byte chkb[] = new byte [60 + 4];
+	@Unsigned static byte chkb[] = new byte [60 + 4];
 	
 	/**
 	 * Calculates a crc checksum-sequence over an array.
 	 */
-	public static byte BlockSequenceCRCByte(byte base[], int offset, int length, int sequence)
+	@Unsigned public static byte BlockSequenceCRCByte(@Unsigned byte base[], int offset, int length, int sequence)
 	{
 		if (sequence < 0)
 			Sys.Error("sequence < 0, this shouldn't happen\n");

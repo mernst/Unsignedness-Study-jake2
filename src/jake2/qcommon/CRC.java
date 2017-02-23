@@ -67,7 +67,7 @@ public class CRC
             0x3eb2, 0x0ed1, 0x1ef0
     };
 
-	@Unsigned static short CRC_Block(byte start[], int count)
+	@Unsigned static short CRC_Block(@Unsigned byte start[], int count)
 	{
 		@Unsigned short crc= CRC_INIT_VALUE;
 

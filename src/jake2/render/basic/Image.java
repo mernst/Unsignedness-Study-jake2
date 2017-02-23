@@ -59,7 +59,7 @@ public abstract class Image extends Main {
 
     int base_textureid; // gltextures[i] = base_textureid+i
 
-    byte[] intensitytable = new byte[256];
+    @Unsigned byte[] intensitytable = new byte[256];
 
     @Unsigned byte[] gammatable = new byte[256];
 
@@ -386,7 +386,7 @@ public abstract class Image extends Main {
 
     int[][] scrap_allocated = new int[MAX_SCRAPS][BLOCK_WIDTH];
 
-    byte[][] scrap_texels = new byte[MAX_SCRAPS][BLOCK_WIDTH * BLOCK_HEIGHT];
+    @Unsigned byte[][] scrap_texels = new byte[MAX_SCRAPS][BLOCK_WIDTH * BLOCK_HEIGHT];
 
     boolean scrap_dirty;
 
@@ -456,13 +456,13 @@ public abstract class Image extends Main {
     /*
      * ============== LoadPCX ==============
      */
-    byte[] LoadPCX(String filename, byte[][] palette, Dimension dim) {
+    byte[] LoadPCX(String filename, @Unsigned byte[][] palette, Dimension dim) {
         qfiles.pcx_t pcx;
 
         //
         // load the file
         //
-        byte[] raw = FS.LoadFile(filename);
+        @Unsigned byte[] raw = FS.LoadFile(filename);
 
         if (raw == null) {
             VID.Printf(Defines.PRINT_DEVELOPER, "Bad pcx file " + filename
@@ -486,7 +486,7 @@ public abstract class Image extends Main {
         int width = pcx.xmax - pcx.xmin + 1;
         int height = pcx.ymax - pcx.ymin + 1;
 
-        byte[] pix = new byte[width * height];
+        @Unsigned byte[] pix = new byte[width * height];
 
         if (palette != null) {
             palette[0] = new byte[768];
@@ -768,9 +768,9 @@ public abstract class Image extends Main {
 
     // TODO check this: R_FloodFillSkin( byte[] skin, int skinwidth, int
     // skinheight)
-    void R_FloodFillSkin(byte[] skin, int skinwidth, int skinheight) {
+    void R_FloodFillSkin(@Unsigned byte[] skin, int skinwidth, int skinheight) {
         //		byte fillcolor = *skin; // assume this is the pixel to fill
-        int fillcolor = skin[0] & 0xff;
+        @Unsigned byte fillcolor = skin[0];
         int inpt = 0, outpt = 0;
         int filledcolor = -1;
         int i;
@@ -986,9 +986,9 @@ public abstract class Image extends Main {
      * 
      * Operates in place, quartering the size of the texture ================
      */
-    void GL_MipMap(int[] in, int width, int height) {
+    void GL_MipMap(@Unsigned int[] in, int width, int height) {
         int i, j;
-        int[] out;
+        @Unsigned int[] out;
 
         out = in;
 
@@ -1231,7 +1231,7 @@ public abstract class Image extends Main {
 
     @Unsigned int[] trans = new int[512 * 256];
 
-    boolean GL_Upload8(byte[] data, int width, int height, boolean mipmap,
+    boolean GL_Upload8(@Unsigned byte[] data, int width, int height, boolean mipmap,
             boolean is_sky) {
 
         Arrays.fill(trans, 0);
@@ -1291,7 +1291,7 @@ public abstract class Image extends Main {
      * This is also used as an entry point for the generated r_notexture
      * ================
      */
-    image_t GL_LoadPic(String name, byte[] pic, int width, int height,
+    image_t GL_LoadPic(String name, @Unsigned byte[] pic, int width, int height,
             int type, int bits) {
         image_t image;
         int i;
@@ -1483,7 +1483,7 @@ public abstract class Image extends Main {
         //
         // load the pic from disk
         //
-        byte[] pic = null;
+        @Unsigned byte[] pic = null;
         Dimension dim = new Dimension();
 
         if (name.endsWith(".pcx")) {
@@ -1559,7 +1559,7 @@ public abstract class Image extends Main {
      */
     protected void Draw_GetPalette() {
         int r, g, b;
-        byte[][] palette = new byte[1][]; //new byte[768];
+        @Unsigned byte[][] palette = new byte[1][]; //new byte[768];
 
         // get the palette
 
@@ -1568,7 +1568,7 @@ public abstract class Image extends Main {
         if (palette[0] == null || palette[0].length != 768)
             Com.Error(Defines.ERR_FATAL, "Couldn't load pics/colormap.pcx");
 
-        byte[] pal = palette[0];
+        @Unsigned byte[] pal = palette[0];
 
         int j = 0;
         for (int i = 0; i < 256; i++) {

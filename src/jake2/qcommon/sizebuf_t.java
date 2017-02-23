@@ -25,6 +25,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 package jake2.qcommon;
 
+import org.checkerframework.checker.signedness.qual.Unsigned;
+
 import java.util.Arrays;
 
 /**
@@ -33,7 +35,7 @@ import java.util.Arrays;
 public final class sizebuf_t {
 	public boolean allowoverflow = false;
 	public boolean overflowed = false;
-	public byte[] data = null;
+	@Unsigned public byte[] data = null;
 	public int maxsize = 0;
 	public int cursize = 0;
 	public int readcount = 0;

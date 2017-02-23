@@ -27,6 +27,7 @@ import jake2.Globals;
 import jake2.game.monsters.M_Player;
 import jake2.util.Lib;
 import jake2.util.Math3D;
+import org.checkerframework.checker.signedness.qual.Unsigned;
 
 public class PlayerWeapon {
 
@@ -711,7 +712,7 @@ public class PlayerWeapon {
 
     public static boolean is_quad;
 
-    public static byte is_silenced;
+    @Unsigned public static byte is_silenced;
 
 
     /*

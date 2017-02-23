@@ -34,6 +34,7 @@ import jake2.qcommon.MSG;
 import jake2.sound.S;
 import jake2.util.Lib;
 import jake2.util.Math3D;
+import org.checkerframework.checker.signedness.qual.Unsigned;
 
 /**
  * Client Graphics Effects.
@@ -1553,7 +1554,7 @@ public class CL_fx {
 		int i;
 		float d, c, s;
 		float[] dir = new float[3];
-		byte clr = 0x74;
+		@Unsigned byte clr = 0x74;
 
 		Math3D.VectorCopy(start, move);
 		Math3D.VectorSubtract(end, start, vec);

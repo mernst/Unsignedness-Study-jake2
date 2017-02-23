@@ -191,7 +191,7 @@ final class Jsr231Renderer extends Jsr231Driver implements refexport_t, Ref {
 	/** 
 	 * @see jake2.client.refexport_t#DrawStretchRaw(int, int, int, int, int, int, byte[])
 	 */
-	public final void DrawStretchRaw(int x, int y, int w, int h, int cols, int rows, byte[] data) {
+	public final void DrawStretchRaw(int x, int y, int w, int h, int cols, int rows, @Unsigned byte[] data) {
 		impl.Draw_StretchRaw(x, y, w, h, cols, rows, data);
 	}
 

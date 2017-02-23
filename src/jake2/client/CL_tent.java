@@ -35,6 +35,7 @@ import jake2.sound.S;
 import jake2.sound.sfx_t;
 import jake2.util.Lib;
 import jake2.util.Math3D;
+import org.checkerframework.checker.signedness.qual.Unsigned;
 
 /**
  * CL_tent
@@ -766,7 +767,7 @@ public class CL_tent {
     /*
      * ================= CL_ParseTEnt =================
      */
-    static int[] splash_color = { 0x00, 0xe0, 0xb0, 0x50, 0xd0, 0xe0, 0xe8 };
+    static @Unsigned int[] splash_color = { 0x00, 0xe0, 0xb0, 0x50, 0xd0, 0xe0, 0xe8 };
     // stack variable
     // pos, dir
     private static final float[] pos2 = {0, 0, 0};

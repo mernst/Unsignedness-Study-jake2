@@ -24,6 +24,7 @@ package jake2.game;
 
 import jake2.qcommon.Com;
 import jake2.util.Math3D;
+import org.checkerframework.checker.signedness.qual.Unsigned;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -40,9 +41,9 @@ public class pmove_state_t {
 	public short origin[] = { 0, 0, 0 }; // 12.3
 	public short velocity[] = { 0, 0, 0 }; // 12.3
 	/** ducked, jump_held, etc. */
-	public byte pm_flags;
+	@Unsigned public byte pm_flags;
 	/** each unit = 8 ms. */
-	public byte pm_time; 
+	@Unsigned public byte pm_time;
 	public short gravity;
 	/** add to command angles to get view direction. */
 	public short delta_angles[] = { 0, 0, 0 }; 

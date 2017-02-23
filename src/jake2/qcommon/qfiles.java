@@ -537,7 +537,7 @@ public class qfiles {
 		public short texinfo;
 
 		// lighting info
-		public byte styles[] = new byte[Defines.MAXLIGHTMAPS];
+		@Unsigned public byte styles[] = new byte[Defines.MAXLIGHTMAPS];
 		public int lightofs; // start of [numstyles*surfsize] samples
 		
 		public dface_t(ByteBuffer b) {

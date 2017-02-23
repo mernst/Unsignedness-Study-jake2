@@ -458,7 +458,7 @@ public class CL_input {
 		in_impulse = 0;
 
 		// send the ambient light level at the player's current position
-		cmd.lightlevel = (byte) Globals.cl_lightlevel.value;
+		cmd.lightlevel = (@Unsigned byte) Globals.cl_lightlevel.value;
 	}
 
 	/*

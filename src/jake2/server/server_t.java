@@ -64,7 +64,7 @@ public class server_t {
     // it is only used to marshall data until SV_Multicast is called
     sizebuf_t multicast = new sizebuf_t();
 
-    byte multicast_buf[] = new byte[Defines.MAX_MSGLEN];
+    @Unsigned byte multicast_buf[] = new byte[Defines.MAX_MSGLEN];
 
     // demo server information
     RandomAccessFile demofile;

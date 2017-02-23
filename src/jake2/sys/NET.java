@@ -30,6 +30,7 @@ import jake2.qcommon.Cvar;
 import jake2.qcommon.netadr_t;
 import jake2.qcommon.sizebuf_t;
 import jake2.util.Lib;
+import org.checkerframework.checker.signedness.qual.Unsigned;
 
 import java.io.IOException;
 import java.net.DatagramSocket;
@@ -47,7 +48,7 @@ public final class NET {
     private static netadr_t net_local_adr = new netadr_t();
 
     public static class loopmsg_t {
-        byte data[] = new byte[Defines.MAX_MSGLEN];
+        @Unsigned byte data[] = new byte[Defines.MAX_MSGLEN];
 
         int datalen;
     };

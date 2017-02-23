@@ -28,6 +28,7 @@ import jake2.game.cplane_t;
 import jake2.qcommon.qfiles;
 import jake2.util.Lib;
 import jake2.util.Math3D;
+import org.checkerframework.checker.signedness.qual.Unsigned;
 
 import java.util.Arrays;
 
@@ -94,7 +95,7 @@ public class model_t implements Cloneable {
 
 	public qfiles.dvis_t vis;
 
-	public byte lightdata[];
+	@Unsigned public byte lightdata[];
 
 	// for alias models and skins
 	// was image_t *skins[]; (array of pointers)

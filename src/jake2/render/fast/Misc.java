@@ -29,6 +29,7 @@ import jake2.Defines;
 import jake2.client.VID;
 import jake2.qcommon.FS;
 import jake2.util.Lib;
+import org.checkerframework.checker.signedness.qual.Unsigned;
 
 import java.io.*;
 import java.nio.FloatBuffer;
@@ -47,7 +48,7 @@ public final class Misc extends Mesh {
 	R_InitParticleTexture
 	==================
 	*/
-	byte[][] dottexture =
+	@Unsigned byte[][] dottexture =
 	{
 		{0,0,0,0,0,0,0,0},
 		{0,0,1,1,0,0,0,0},
@@ -62,7 +63,7 @@ public final class Misc extends Mesh {
 	void R_InitParticleTexture()
 	{
 		int		x,y;
-		byte[] data = new byte[8 * 8 * 4];
+		@Unsigned byte[] data = new byte[8 * 8 * 4];
 
 		//
 		// particle texture

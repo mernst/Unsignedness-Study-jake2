@@ -94,7 +94,7 @@ public abstract class Surf extends Draw {
 	gllightmapstate_t gl_lms = new gllightmapstate_t();
 
 	// Model.java
-	abstract byte[] Mod_ClusterPVS(int cluster, model_t model);
+	@Unsigned abstract byte[] Mod_ClusterPVS(int cluster, model_t model);
 	// Warp.java
 	abstract void R_DrawSkyBox();
 	abstract void R_AddSkySurface(msurface_t surface);
@@ -929,7 +929,7 @@ public abstract class Surf extends Draw {
 			return;
 		}
 
-		byte[] vis = Mod_ClusterPVS(r_viewcluster, r_worldmodel);
+		@Unsigned byte[] vis = Mod_ClusterPVS(r_viewcluster, r_worldmodel);
 		int c;
 		// may have to combine two clusters because of solid water boundaries
 		if (r_viewcluster2 != r_viewcluster)

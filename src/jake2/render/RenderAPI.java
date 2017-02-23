@@ -46,7 +46,7 @@ public interface RenderAPI {
     void Draw_FadeScreen();
 
     void Draw_StretchRaw(int x, int y, int w, int h, int cols, int rows,
-            byte[] data);
+            @Unsigned byte[] data);
 
     void R_SetPalette(@Unsigned byte[] palette);
 

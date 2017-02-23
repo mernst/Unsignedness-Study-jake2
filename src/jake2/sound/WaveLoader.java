@@ -26,6 +26,7 @@ package jake2.sound;
 import jake2.Defines;
 import jake2.qcommon.Com;
 import jake2.qcommon.FS;
+import org.checkerframework.checker.signedness.qual.Unsigned;
 
 /**
  * SND_MEM
@@ -70,7 +71,7 @@ public class WaveLoader {
 		else
 			namebuffer = "sound/" + name;
 
-		byte[] data = FS.LoadFile(namebuffer);
+		@Unsigned byte[] data = FS.LoadFile(namebuffer);
 
 		if (data == null) {
 			Com.DPrintf("Couldn't load " + namebuffer + "\n");
@@ -122,7 +123,7 @@ public class WaveLoader {
 	 * Converts sample data with respect to the endianess and adjusts 
 	 * the sample rate of a loaded sample, see flag DONT_DO_A_RESAMPLING_FOR_JOAL_AND_LWJGL.
 	 */
-	public static void ResampleSfx (sfx_t sfx, int inrate, int inwidth, byte data[], int offset)
+	public static void ResampleSfx (sfx_t sfx, int inrate, int inwidth, @Unsigned byte data[], int offset)
 	{
         int             outcount;
         int             srcsample;
@@ -185,10 +186,10 @@ public class WaveLoader {
 
 
 	static byte[] data_b;
-	static int data_p;
-	static int iff_end;
-	static int last_chunk;
-	static int iff_data;
+	@Unsigned static int data_p;
+	@Unsigned static int iff_end;
+	@Unsigned static int last_chunk;
+	@Unsigned static int iff_data;
 	static int iff_chunk_len;
 
 
@@ -252,7 +253,7 @@ public class WaveLoader {
 	GetWavinfo
 	============
 	*/
-	static wavinfo_t GetWavinfo(String name, byte[] wav, int wavlength) {
+	static wavinfo_t GetWavinfo(String name, @Unsigned byte[] wav, int wavlength) {
 		wavinfo_t info = new wavinfo_t();
 		int i;
 		int format;

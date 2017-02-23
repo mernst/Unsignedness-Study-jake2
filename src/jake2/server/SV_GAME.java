@@ -27,6 +27,7 @@ import jake2.Globals;
 import jake2.game.*;
 import jake2.qcommon.*;
 import jake2.util.Math3D;
+import org.checkerframework.checker.signedness.qual.Unsigned;
 
 public class SV_GAME {
 
@@ -221,7 +222,7 @@ public class SV_GAME {
         int leafnum;
         int cluster;
         int area1, area2;
-        byte mask[];
+        @Unsigned byte mask[];
 
         leafnum = CM.CM_PointLeafnum(p1);
         cluster = CM.CM_LeafCluster(leafnum);
@@ -253,7 +254,7 @@ public class SV_GAME {
         int leafnum;
         int cluster;
         int area1, area2;
-        byte mask[];
+        @Unsigned byte mask[];
 
         leafnum = CM.CM_PointLeafnum(p1);
         cluster = CM.CM_LeafCluster(leafnum);
