@@ -41,6 +41,7 @@ import java.nio.ByteOrder;
 import java.nio.IntBuffer;
 import java.util.Arrays;
 
+import org.checkerframework.checker.signedness.qual.*;
 
 /**
  * Image
@@ -58,9 +59,9 @@ public abstract class Image extends Main {
 
     int base_textureid; // gltextures[i] = base_textureid+i
 
-    byte[] intensitytable = new byte[256];
+    @Unsigned byte[] intensitytable = new byte[256];
 
-    byte[] gammatable = new byte[256];
+    @Unsigned byte[] gammatable = new byte[256];
 
     cvar_t intensity;
 
@@ -91,7 +92,7 @@ public abstract class Image extends Main {
         numgltextures = 0;
     }
 
-    void GL_SetTexturePalette(int[] palette) {
+    void GL_SetTexturePalette(@Unsigned int[] palette) {
 
         assert (palette != null && palette.length == 256) : "int palette[256] bug";
 
@@ -385,7 +386,7 @@ public abstract class Image extends Main {
 
     int[][] scrap_allocated = new int[MAX_SCRAPS][BLOCK_WIDTH];
 
-    byte[][] scrap_texels = new byte[MAX_SCRAPS][BLOCK_WIDTH * BLOCK_HEIGHT];
+    @Unsigned byte[][] scrap_texels = new byte[MAX_SCRAPS][BLOCK_WIDTH * BLOCK_HEIGHT];
 
     boolean scrap_dirty;
 
@@ -455,13 +456,13 @@ public abstract class Image extends Main {
     /*
      * ============== LoadPCX ==============
      */
-    byte[] LoadPCX(String filename, byte[][] palette, Dimension dim) {
+    byte[] LoadPCX(String filename, @Unsigned byte[][] palette, Dimension dim) {
         qfiles.pcx_t pcx;
 
         //
         // load the file
         //
-        byte[] raw = FS.LoadFile(filename);
+        @Unsigned byte[] raw = FS.LoadFile(filename);
 
         if (raw == null) {
             VID.Printf(Defines.PRINT_DEVELOPER, "Bad pcx file " + filename
@@ -485,7 +486,7 @@ public abstract class Image extends Main {
         int width = pcx.xmax - pcx.xmin + 1;
         int height = pcx.ymax - pcx.ymin + 1;
 
-        byte[] pix = new byte[width * height];
+        @Unsigned byte[] pix = new byte[width * height];
 
         if (palette != null) {
             palette[0] = new byte[768];
@@ -586,9 +587,9 @@ public abstract class Image extends Main {
 
         buf_p = targa_header.data;
 
-        byte red, green, blue, alphabyte;
+        @Unsigned byte red, green, blue, alphabyte;
         red = green = blue = alphabyte = 0;
-        int packetHeader, packetSize, j;
+        @Unsigned int packetHeader, packetSize, j;
 
         if (targa_header.image_type == 2) { // Uncompressed, RGB images
             for (row = rows - 1; row >= 0; row--) {
@@ -767,9 +768,9 @@ public abstract class Image extends Main {
 
     // TODO check this: R_FloodFillSkin( byte[] skin, int skinwidth, int
     // skinheight)
-    void R_FloodFillSkin(byte[] skin, int skinwidth, int skinheight) {
+    void R_FloodFillSkin(@Unsigned byte[] skin, int skinwidth, int skinheight) {
         //		byte fillcolor = *skin; // assume this is the pixel to fill
-        int fillcolor = skin[0] & 0xff;
+        @Unsigned byte fillcolor = skin[0];
         int inpt = 0, outpt = 0;
         int filledcolor = -1;
         int i;
@@ -874,7 +875,7 @@ public abstract class Image extends Main {
      * ================ GL_ResampleTexture ================
      */
     // cwei :-)
-    void GL_ResampleTexture(int[] in, int inwidth, int inheight, int[] out,
+    void GL_ResampleTexture(@Unsigned int[] in, int inwidth, int inheight, @Unsigned int[] out,
             int outwidth, int outheight) {
         //		int i, j;
         //		unsigned *inrow, *inrow2;
@@ -940,7 +941,7 @@ public abstract class Image extends Main {
      * Scale up the pixel values in a texture to increase the lighting range
      * ================
      */
-    void GL_LightScaleTexture(int[] in, int inwidth, int inheight,
+    void GL_LightScaleTexture(@Unsigned int[] in, int inwidth, int inheight,
             boolean only_gamma) {
         if (only_gamma) {
             int i, c;
@@ -985,9 +986,9 @@ public abstract class Image extends Main {
      * 
      * Operates in place, quartering the size of the texture ================
      */
-    void GL_MipMap(int[] in, int width, int height) {
+    void GL_MipMap(@Unsigned int[] in, int width, int height) {
         int i, j;
-        int[] out;
+        @Unsigned int[] out;
 
         out = in;
 
@@ -1024,10 +1025,10 @@ public abstract class Image extends Main {
      * 
      * Returns has_alpha ===============
      */
-    void GL_BuildPalettedTexture(ByteBuffer paletted_texture, int[] scaled,
+    void GL_BuildPalettedTexture(ByteBuffer paletted_texture, @Unsigned int[] scaled,
             int scaled_width, int scaled_height) {
 
-        int r, g, b, c;
+        @Unsigned int r, g, b, c;
         int size = scaled_width * scaled_height;
 
         for (int i = 0; i < size; i++) {
@@ -1051,13 +1052,13 @@ public abstract class Image extends Main {
      * 
      * Returns has_alpha ===============
      */
-    int[] scaled = new int[256 * 256];
+    @Unsigned int[] scaled = new int[256 * 256];
 
     ByteBuffer paletted_texture = Lib.newByteBuffer(256*256);
 
     IntBuffer tex = Lib.newIntBuffer(512 * 256, ByteOrder.LITTLE_ENDIAN);
 
-    boolean GL_Upload32(int[] data, int width, int height, boolean mipmap) {
+    boolean GL_Upload32(@Unsigned int[] data, int width, int height, boolean mipmap) {
         int samples;
         int scaled_width, scaled_height;
         int i, c;
@@ -1228,9 +1229,9 @@ public abstract class Image extends Main {
      * Returns has_alpha ===============
      */
 
-    int[] trans = new int[512 * 256];
+    @Unsigned int[] trans = new int[512 * 256];
 
-    boolean GL_Upload8(byte[] data, int width, int height, boolean mipmap,
+    boolean GL_Upload8(@Unsigned byte[] data, int width, int height, boolean mipmap,
             boolean is_sky) {
 
         Arrays.fill(trans, 0);
@@ -1290,7 +1291,7 @@ public abstract class Image extends Main {
      * This is also used as an entry point for the generated r_notexture
      * ================
      */
-    image_t GL_LoadPic(String name, byte[] pic, int width, int height,
+    image_t GL_LoadPic(String name, @Unsigned byte[] pic, int width, int height,
             int type, int bits) {
         image_t image;
         int i;
@@ -1482,7 +1483,7 @@ public abstract class Image extends Main {
         //
         // load the pic from disk
         //
-        byte[] pic = null;
+        @Unsigned byte[] pic = null;
         Dimension dim = new Dimension();
 
         if (name.endsWith(".pcx")) {
@@ -1558,7 +1559,7 @@ public abstract class Image extends Main {
      */
     protected void Draw_GetPalette() {
         int r, g, b;
-        byte[][] palette = new byte[1][]; //new byte[768];
+        @Unsigned byte[][] palette = new byte[1][]; //new byte[768];
 
         // get the palette
 
@@ -1567,7 +1568,7 @@ public abstract class Image extends Main {
         if (palette[0] == null || palette[0].length != 768)
             Com.Error(Defines.ERR_FATAL, "Couldn't load pics/colormap.pcx");
 
-        byte[] pal = palette[0];
+        @Unsigned byte[] pal = palette[0];
 
         int j = 0;
         for (int i = 0; i < 256; i++) {

@@ -34,6 +34,8 @@ import jake2.sys.KBD;
 import java.awt.Dimension;
 import java.awt.DisplayMode;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 /**
  * refexport_t
  * 
@@ -87,13 +89,13 @@ public interface refexport_t {
 	void DrawFadeScreen();
 
 	// Draw images for cinematic rendering (which can have a different palette). Note that calls
-	void DrawStretchRaw(int x,	int y, int w, int h, int cols, int rows, byte[] data);
+	void DrawStretchRaw(int x,	int y, int w, int h, int cols, int rows, @Unsigned byte[] data);
 
 	/*
 	** video mode and refresh state management entry points
 	*/
 	/* 256 r,g,b values;	null = game palette, size = 768 bytes */
-	void CinematicSetPalette(final byte[] palette);
+	void CinematicSetPalette(final @Unsigned byte[] palette);
 	void BeginFrame(float camera_separation);
 	void EndFrame();
 

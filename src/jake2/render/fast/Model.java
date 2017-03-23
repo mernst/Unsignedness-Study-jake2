@@ -32,6 +32,7 @@ import jake2.game.cvar_t;
 import jake2.qcommon.*;
 import jake2.render.*;
 import jake2.util.*;
+import org.checkerframework.checker.signedness.qual.Unsigned;
 
 import java.nio.*;
 import java.util.Arrays;
@@ -49,7 +50,7 @@ public abstract class Model extends Surf {
 	model_t	loadmodel;
 	int modfilelen;
 
-	byte[] mod_novis = new byte[Defines.MAX_MAP_LEAFS/8];
+	@Unsigned byte[] mod_novis = new byte[Defines.MAX_MAP_LEAFS/8];
 
 	static final int MAX_MOD_KNOWN = 512;
 	model_t[] mod_known = new model_t[MAX_MOD_KNOWN];
@@ -91,7 +92,7 @@ public abstract class Model extends Surf {
 	}
 
 
-	byte[] decompressed = new byte[Defines.MAX_MAP_LEAFS / 8];
+	@Unsigned byte[] decompressed = new byte[Defines.MAX_MAP_LEAFS / 8];
 	byte[] model_visibility = new byte[Defines.MAX_MAP_VISIBILITY]; 
 
 	/*
@@ -99,10 +100,10 @@ public abstract class Model extends Surf {
 	Mod_DecompressVis
 	===================
 	*/
-	byte[] Mod_DecompressVis(byte[] in, int offset, model_t model)
+	@Unsigned byte[] Mod_DecompressVis(@Unsigned byte[] in, int offset, model_t model)
 	{
 		int c;
-		byte[] out;
+		@Unsigned byte[] out;
 		int outp, inp;
 		int row;
 
@@ -146,7 +147,7 @@ public abstract class Model extends Surf {
 	Mod_ClusterPVS
 	==============
 	*/
-	byte[] Mod_ClusterPVS(int cluster, model_t model)
+	@Unsigned byte[] Mod_ClusterPVS(int cluster, model_t model)
 	{
 		if (cluster == -1 || model.vis == null)
 			return mod_novis;
@@ -316,7 +317,7 @@ public abstract class Model extends Surf {
 	===============================================================================
 	*/
 
-	byte[] mod_base;
+	@Unsigned byte[] mod_base;
 
 
 	/*

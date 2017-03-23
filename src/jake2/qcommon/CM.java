@@ -31,6 +31,8 @@ import java.io.RandomAccessFile;
 import java.nio.*;
 import java.util.Arrays;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 public class CM {
 
     public static class cnode_t {
@@ -131,7 +133,7 @@ public class CM {
 
     static int numleafbrushes;
 
-    public static int map_leafbrushes[] = new int[Defines.MAX_MAP_LEAFBRUSHES];
+    @Unsigned public static short map_leafbrushes[] = new short[Defines.MAX_MAP_LEAFBRUSHES];
 
     public static int numcmodels;
 
@@ -153,7 +155,7 @@ public class CM {
 
     public static int numvisibility;
 
-    public static byte map_visibility[] = new byte[Defines.MAX_MAP_VISIBILITY];
+    @Unsigned public static byte map_visibility[] = new byte[Defines.MAX_MAP_VISIBILITY];
 
     /** Main visibility data. */
     public static qfiles.dvis_t map_vis = new qfiles.dvis_t(ByteBuffer
@@ -192,19 +194,19 @@ public class CM {
 
     public static cvar_t map_noareas;
 
-    public static byte cmod_base[];
+    @Unsigned public static byte cmod_base[];
 
     public static int checksum;
 
-    public static int last_checksum;
+    @Unsigned public static int last_checksum;
 
     /** 
      * Loads in the map and all submodels.
      */
     public static cmodel_t CM_LoadMap(String name, boolean clientload,
-            int checksum[]) {
+            @Unsigned int checksum[]) {
         Com.DPrintf("CM_LoadMap(" + name + ")...\n");
-        byte buf[];
+        @Unsigned byte buf[];
         qfiles.dheader_t header;
         int length;
 
@@ -599,7 +601,7 @@ public class CM {
         if (count > Defines.MAX_MAP_LEAFBRUSHES)
             Com.Error(Defines.ERR_DROP, "Map has too many leafbrushes");
 
-        int[] out = map_leafbrushes;
+        @Unsigned short[] out = map_leafbrushes;
         numleafbrushes = count;
 
         ByteBuffer bb = ByteBuffer.wrap(cmod_base, l.fileofs, count * 2).order(
@@ -868,7 +870,7 @@ public class CM {
         box_leaf.firstleafbrush = (short) numleafbrushes;
         box_leaf.numleafbrushes = 1;
 
-        map_leafbrushes[numleafbrushes] = numbrushes;
+        map_leafbrushes[numleafbrushes] = (short) numbrushes;
 
         int side;
         cnode_t c;
@@ -1567,7 +1569,7 @@ public class CM {
     /*
      * =================== CM_DecompressVis ===================
      */
-    public static void CM_DecompressVis(byte in[], int offset, byte out[]) {
+    public static void CM_DecompressVis(@Unsigned byte in[], int offset, @Unsigned byte out[]) {
         int c;
 
         int row;
@@ -1604,11 +1606,11 @@ public class CM {
         } while (outp < row);
     }
 
-    public static byte pvsrow[] = new byte[Defines.MAX_MAP_LEAFS / 8];
+    @Unsigned public static byte pvsrow[] = new byte[Defines.MAX_MAP_LEAFS / 8];
 
-    public static byte phsrow[] = new byte[Defines.MAX_MAP_LEAFS / 8];
+    @Unsigned public static byte phsrow[] = new byte[Defines.MAX_MAP_LEAFS / 8];
 
-    public static byte[] CM_ClusterPVS(int cluster) {
+    @Unsigned public static byte[] CM_ClusterPVS(int cluster) {
         if (cluster == -1)
             Arrays.fill(pvsrow, 0, (numclusters + 7) >> 3, (byte) 0);
         else
@@ -1617,7 +1619,7 @@ public class CM {
         return pvsrow;
     }
 
-    public static byte[] CM_ClusterPHS(int cluster) {
+    @Unsigned public static byte[] CM_ClusterPHS(int cluster) {
         if (cluster == -1)
             Arrays.fill(phsrow, 0, (numclusters + 7) >> 3, (byte) 0);
         else
@@ -1713,7 +1715,7 @@ public class CM {
      * 
      * This is used by the client refreshes to cull visibility.
      */
-    public static int CM_WriteAreaBits(byte buffer[], int area) {
+    public static int CM_WriteAreaBits(@Unsigned byte buffer[], int area) {
         int i;
         int floodnum;
         int bytes;
@@ -1779,7 +1781,7 @@ public class CM {
      * CM_HeadnodeVisible returns true if any leaf under headnode has a cluster that is potentially
      * visible.
      */
-    public static boolean CM_HeadnodeVisible(int nodenum, byte visbits[]) {
+    public static boolean CM_HeadnodeVisible(int nodenum, @Unsigned byte visbits[]) {
         if (nodenum < 0) {
             int leafnum = -1 - nodenum;
             int cluster = map_leafs[leafnum].cluster;

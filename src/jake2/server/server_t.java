@@ -26,6 +26,7 @@ import jake2.Defines;
 import jake2.game.cmodel_t;
 import jake2.game.entity_state_t;
 import jake2.qcommon.sizebuf_t;
+import org.checkerframework.checker.signedness.qual.Unsigned;
 
 import java.io.RandomAccessFile;
 
@@ -47,7 +48,7 @@ public class server_t {
 
     boolean loadgame; // client begins should reuse existing entity
 
-    int time; // always sv.framenum * 100 msec
+    @Unsigned int time; // always sv.framenum * 100 msec
 
     int framenum;
 
@@ -63,7 +64,7 @@ public class server_t {
     // it is only used to marshall data until SV_Multicast is called
     sizebuf_t multicast = new sizebuf_t();
 
-    byte multicast_buf[] = new byte[Defines.MAX_MSGLEN];
+    @Unsigned byte multicast_buf[] = new byte[Defines.MAX_MSGLEN];
 
     // demo server information
     RandomAccessFile demofile;

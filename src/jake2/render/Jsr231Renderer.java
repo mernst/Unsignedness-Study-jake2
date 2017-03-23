@@ -31,6 +31,7 @@ import jake2.client.refexport_t;
 import jake2.render.opengl.Jsr231Driver;
 import jake2.sys.JOGLKBD;
 import jake2.sys.KBD;
+import org.checkerframework.checker.signedness.qual.Unsigned;
 
 import java.awt.Dimension;
 
@@ -190,14 +191,14 @@ final class Jsr231Renderer extends Jsr231Driver implements refexport_t, Ref {
 	/** 
 	 * @see jake2.client.refexport_t#DrawStretchRaw(int, int, int, int, int, int, byte[])
 	 */
-	public final void DrawStretchRaw(int x, int y, int w, int h, int cols, int rows, byte[] data) {
+	public final void DrawStretchRaw(int x, int y, int w, int h, int cols, int rows, @Unsigned byte[] data) {
 		impl.Draw_StretchRaw(x, y, w, h, cols, rows, data);
 	}
 
 	/** 
 	 * @see jake2.client.refexport_t#CinematicSetPalette(byte[])
 	 */
-	public final void CinematicSetPalette(byte[] palette) {
+	public final void CinematicSetPalette(@Unsigned byte[] palette) {
 		impl.R_SetPalette(palette);
 	}
 

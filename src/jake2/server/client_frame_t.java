@@ -24,11 +24,12 @@ package jake2.server;
 
 import jake2.Defines;
 import jake2.game.player_state_t;
+import org.checkerframework.checker.signedness.qual.Unsigned;
 
 public class client_frame_t {
 
 	int					areabytes;
-	byte				areabits[] = new byte[Defines.MAX_MAP_AREAS/8];		// portalarea visibility bits
+	@Unsigned byte				areabits[] = new byte[Defines.MAX_MAP_AREAS/8];		// portalarea visibility bits
 	player_state_t		ps = new player_state_t();
 	int					num_entities;
 	int					first_entity;		// into the circular sv_packet_entities[]

@@ -38,6 +38,8 @@ import java.awt.Dimension;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 /**
  * Main
  * 
@@ -45,7 +47,7 @@ import java.nio.IntBuffer;
  */
 public abstract class Main extends Base {
 
-	public static int[] d_8to24table = new int[256];
+	@Unsigned public static int[] d_8to24table = new int[256];
 
 	int c_visible_lightmaps;
 	int c_visible_textures;
@@ -69,7 +71,7 @@ public abstract class Main extends Base {
 
 	abstract void GL_ImageList_f();
 	public abstract void GL_ScreenShot_f();
-	abstract void GL_SetTexturePalette(int[] palette);
+	abstract void GL_SetTexturePalette(@Unsigned int[] palette);
 	abstract void GL_Strings_f();
 
 	abstract void Mod_Modellist_f();
@@ -1467,14 +1469,14 @@ public abstract class Main extends Base {
 		R_Clear();
 	}
 
-	int[] r_rawpalette = new int[256];
+	@Unsigned int[] r_rawpalette = new int[256];
 
 	/*
 	=============
 	R_SetPalette
 	=============
 	*/
-	public void R_SetPalette(byte[] palette) {
+	public void R_SetPalette(@Unsigned byte[] palette) {
 		// 256 RGB values (768 bytes)
 		// or null
 		int i;

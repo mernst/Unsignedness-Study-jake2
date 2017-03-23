@@ -23,16 +23,17 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 package jake2.game;
 
 import jake2.util.Math3D;
+import org.checkerframework.checker.signedness.qual.Unsigned;
 
 public class cplane_t
 {
 	public float normal[] = new float[3];
 	public float dist;
 	/** This is for fast side tests, 0=xplane, 1=yplane, 2=zplane and 3=arbitrary. */
-	public byte type;
+	@Unsigned public byte type;
 	/** This represents signx + (signy<<1) + (signz << 1). */
-	public byte signbits; // signx + (signy<<1) + (signz<<1)
-	public byte pad[] = { 0, 0 };
+	@Unsigned public byte signbits; // signx + (signy<<1) + (signz<<1)
+	@Unsigned public byte pad[] = { 0, 0 };
 	
 	public void set(cplane_t c) {
 		Math3D.set(normal, c.normal);

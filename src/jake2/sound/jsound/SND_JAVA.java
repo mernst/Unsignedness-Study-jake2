@@ -28,6 +28,7 @@ package jake2.sound.jsound;
 import jake2.Globals;
 import jake2.game.cvar_t;
 import jake2.qcommon.Cvar;
+import org.checkerframework.checker.signedness.qual.Unsigned;
 
 import javax.sound.sampled.*;
 
@@ -49,7 +50,7 @@ public class SND_JAVA extends Globals {
 		//int samplepos; // in mono samples
 		int samplebits;
 		int speed;
-		byte[] buffer;
+		@Unsigned byte[] buffer;
 	}
   	static SND_DMA.dma_t dma = new dma_t();
   	

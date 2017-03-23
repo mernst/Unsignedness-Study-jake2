@@ -36,6 +36,8 @@ import java.nio.ByteOrder;
 import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 /**
  * SND_MIX
  */
@@ -62,7 +64,7 @@ public class SND_MIX extends SND_JAVA {
 
         float[] origin = { 0, 0, 0 };
 
-        long begin; // begin on this sample
+        @Unsigned int begin; // begin on this sample
 
         public void clear() {
             prev = next = null;

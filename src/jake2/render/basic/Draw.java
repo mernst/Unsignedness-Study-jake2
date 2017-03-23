@@ -30,6 +30,7 @@ import jake2.client.VID;
 import jake2.qcommon.Com;
 import jake2.render.image_t;
 import jake2.util.Lib;
+import org.checkerframework.checker.signedness.qual.Unsigned;
 
 import java.awt.Dimension;
 import java.nio.ByteBuffer;
@@ -309,7 +310,7 @@ public abstract class Draw extends Image {
 	Draw_StretchRaw
 	=============
 	*/
-	public void Draw_StretchRaw (int x, int y, int w, int h, int cols, int rows, byte[] data)
+	public void Draw_StretchRaw (int x, int y, int w, int h, int cols, int rows, @Unsigned byte[] data)
 	{
 		int i, j, trows;
 		int sourceIndex;

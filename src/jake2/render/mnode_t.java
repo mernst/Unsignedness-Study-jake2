@@ -25,6 +25,8 @@ package jake2.render;
 
 import jake2.game.*;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 public class mnode_t {
 	//	common with leaf
 	public int contents; // -1, to differentiate from leafs
@@ -41,7 +43,7 @@ public class mnode_t {
 	public mnode_t children[] = new mnode_t[2];
 
 	// unsigned short
-	public int firstsurface;
-	public int numsurfaces;
+	@Unsigned public short firstsurface;
+	@Unsigned public short numsurfaces;
 
 }

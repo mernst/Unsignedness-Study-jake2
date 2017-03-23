@@ -23,6 +23,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 package jake2.render;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 public class glstate_t 
 {
 	public float inverse_intensity;
@@ -30,7 +32,7 @@ public class glstate_t
 
 	public int prev_mode;
 
-	public byte d_16to8table[];
+	@Unsigned public byte d_16to8table[];
 
 	public int lightmap_textures;
 
@@ -40,8 +42,8 @@ public class glstate_t
 	public float camera_separation;
 	public boolean stereo_enabled;
 
-	public byte originalRedGammaTable[]= new byte [256];
-	public byte originalGreenGammaTable[]= new byte [256];
-	public byte originalBlueGammaTable[]= new byte [256];
+	@Unsigned public byte originalRedGammaTable[]= new byte [256];
+	@Unsigned public byte originalGreenGammaTable[]= new byte [256];
+	@Unsigned public byte originalBlueGammaTable[]= new byte [256];
 
 }

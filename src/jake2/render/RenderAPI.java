@@ -5,6 +5,8 @@ import jake2.render.opengl.GLDriver;
 
 import java.awt.Dimension;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 public interface RenderAPI {
 
     void setGLDriver(GLDriver impl);
@@ -44,9 +46,9 @@ public interface RenderAPI {
     void Draw_FadeScreen();
 
     void Draw_StretchRaw(int x, int y, int w, int h, int cols, int rows,
-            byte[] data);
+            @Unsigned byte[] data);
 
-    void R_SetPalette(byte[] palette);
+    void R_SetPalette(@Unsigned byte[] palette);
 
     void R_BeginFrame(float camera_separation);
 

@@ -31,6 +31,8 @@ import org.checkerframework.checker.unsignedness.qual.Unsigned;
 
 import java.nio.*;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 /**
  * qfiles
  * 
@@ -68,7 +70,7 @@ public class qfiles {
 		public byte encoding;
 		public byte bits_per_pixel;
 		@Unsigned public short xmin, ymin, xmax, ymax; // unsigned short
-		@Unsigned public short hres, vres; // unsigned short
+		@Unsigned public short  hres, vres; // unsigned short
 		@Unsigned public byte[] palette; //unsigned byte; size 48
 		public byte reserved;
 		public byte color_planes;
@@ -90,17 +92,17 @@ public class qfiles {
 			version = b.get();
 			encoding = b.get();
 			bits_per_pixel = b.get();
-			xmin = Globals.getUnsignedShort(b);
-			ymin = Globals.getUnsignedShort(b);
-			xmax = Globals.getUnsignedShort(b);
-			ymax = Globals.getUnsignedShort(b);
-			hres = Globals.getUnsignedShort(b);
-			vres = Globals.getUnsignedShort(b);
-			Globals.getUnsigned(b, palette = new byte[PALETTE_SIZE]);
+			xmin = b.getShort();
+			ymin = b.getShort();
+			xmax = b.getShort();
+			ymax = b.getShort();
+			hres = b.getShort();
+			vres = b.getShort();
+			b.get(palette = new byte[PALETTE_SIZE]);
 			reserved = b.get();
 			color_planes = b.get();
-			bytes_per_line = Globals.getUnsignedShort(b);
-			palette_type = Globals.getUnsignedShort(b);
+			bytes_per_line = b.getShort();
+			palette_type = b.getShort();
 			b.get(filler = new byte[FILLER_SIZE]);
 
 			// fill data
@@ -135,18 +137,18 @@ public class qfiles {
 			b.order(ByteOrder.LITTLE_ENDIAN);
 
 			// fill header
-			id_length = Globals.getUnsigned(b);
-			colormap_type = Globals.getUnsigned(b);
-			image_type = Globals.getUnsigned(b);
-			colormap_index = Globals.getUnsignedShort(b);
-			colormap_length = Globals.getUnsignedShort(b);
-			colormap_size = Globals.getUnsigned(b);
-			x_origin = Globals.getUnsignedShort(b);
-			y_origin = Globals.getUnsignedShort(b);
-			width = Globals.getUnsignedShort(b);
-			height = Globals.getUnsignedShort(b);
-			pixel_size = Globals.getUnsigned(b);
-			attributes = Globals.getUnsigned(b);
+			id_length = b.get();
+			colormap_type = b.get();
+			image_type = b.get();
+			colormap_index = b.getShort();
+			colormap_length = b.getShort();
+			colormap_size = b.get();
+			x_origin = b.getShort();
+			y_origin = b.getShort();
+			width = b.getShort();
+			height = b.getShort();
+			pixel_size = b.get();
+			attributes = b.get();
 
 			// fill data
 			data = b.slice();
@@ -346,8 +348,8 @@ public class qfiles {
 		static final int NAME_SIZE = 32;
 
 		public String name; // char name[32];
-		public int width, height;
-		public int[] offsets = new int[MIPLEVELS]; // 4 mip maps stored
+		@Unsigned public int width, height;
+		@Unsigned public int[] offsets = new int[MIPLEVELS]; // 4 mip maps stored
 		// next frame in animation chain
 		public String animname; //	char	animname[32];
 		public int flags;
@@ -489,8 +491,8 @@ public class qfiles {
 			for (int j = 0; j < 3; j++)
 				maxs[j] = bb.getShort();
 
-			firstface = Globals.getUnsignedShort(bb);
-			numfaces = Globals.getUnsignedShort(bb);
+			firstface = bb.getShort();
+			numfaces = bb.getShort();
 
 		}
 
@@ -537,11 +539,11 @@ public class qfiles {
 		public short texinfo;
 
 		// lighting info
-		public byte styles[] = new byte[Defines.MAXLIGHTMAPS];
+		@Unsigned public byte styles[] = new byte[Defines.MAXLIGHTMAPS];
 		public int lightofs; // start of [numstyles*surfsize] samples
 		
 		public dface_t(ByteBuffer b) {
-			planenum = Globals.getUnsignedShort(b);
+			planenum = b.getShort();
 			side = b.getShort();
 			firstedge = b.getInt();
 			numedges = b.getShort();
@@ -571,11 +573,11 @@ public class qfiles {
 			maxs[1] = bb.getShort();
 			maxs[2] = bb.getShort();
 
-			firstleafface = Globals.getUnsignedShort(bb);
-			numleaffaces = Globals.getUnsignedShort(bb);
+			firstleafface = bb.getShort();
+			numleaffaces = bb.getShort();
 
-			firstleafbrush = Globals.getUnsignedShort(bb);
-			numleafbrushes = Globals.getUnsignedShort(bb);
+			firstleafbrush = bb.getShort();
+			numleafbrushes = bb.getShort();
 		}
 
 		public static final int SIZE = 4 + 8 * 2 + 4 * 2;
@@ -600,7 +602,7 @@ public class qfiles {
 		public dbrushside_t(ByteBuffer bb) {
 			bb.order(ByteOrder.LITTLE_ENDIAN);
 
-			planenum = Globals.getUnsignedShort(bb);
+			planenum = bb.getShort();
 			texinfo = bb.getShort();
 		}
 

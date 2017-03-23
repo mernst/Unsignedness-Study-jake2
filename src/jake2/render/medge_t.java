@@ -26,6 +26,8 @@ import jake2.Defines;
 
 import java.nio.ByteBuffer;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 public class medge_t {
 
     public static final int DISK_SIZE = 2 * Defines.SIZE_OF_SHORT;
@@ -33,12 +35,12 @@ public class medge_t {
     public static final int MEM_SIZE = 3 * Defines.SIZE_OF_INT;
 
     // unsigned short
-    public int[] v = new int[2];
+    @Unsigned public short[] v = new short[2];
 
-    public int cachededgeoffset;
+    @Unsigned public int cachededgeoffset;
 
     public medge_t(ByteBuffer b) {
-        v[0] = b.getShort() & 0xFFFF;
-        v[1] = b.getShort() & 0xFFFF;
+        v[0] = b.getShort();
+        v[1] = b.getShort();
     }
 }

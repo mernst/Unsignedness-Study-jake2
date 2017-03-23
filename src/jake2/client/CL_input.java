@@ -35,14 +35,16 @@ import jake2.sys.IN;
 import jake2.util.Lib;
 import jake2.util.Math3D;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 /**
  * CL_input
  */
 public class CL_input {
 
-	static long frame_msec;
+	@Unsigned static int frame_msec;
 
-	static long old_sys_frame_time;
+	@Unsigned static int old_sys_frame_time;
 
 	static cvar_t cl_nodelta;
 
@@ -141,7 +143,7 @@ public class CL_input {
 	static void KeyUp(kbutton_t b) {
 		int k;
 		String c;
-		int uptime;
+		@Unsigned int uptime;
 
 		c = Cmd.Argv(1);
 		if (c.length() > 0)
@@ -456,7 +458,7 @@ public class CL_input {
 		in_impulse = 0;
 
 		// send the ambient light level at the player's current position
-		cmd.lightlevel = (byte) Globals.cl_lightlevel.value;
+		cmd.lightlevel = (@Unsigned byte) Globals.cl_lightlevel.value;
 	}
 
 	/*

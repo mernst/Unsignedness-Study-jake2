@@ -23,13 +23,15 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 package jake2.sound;
 
+import org.checkerframework.checker.signedness.qual.Unsigned;
+
 public class sfxcache_t {
 	public int length;
 	public int loopstart;
 	public int speed;			// not needed, because converted on load?
 	public int width;
 	public int stereo;
-	public byte data[];		// variable sized
+	@Unsigned public byte data[];		// variable sized
 	
 	public sfxcache_t(int size) {
 		data = new byte[size];

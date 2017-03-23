@@ -28,13 +28,15 @@ import jake2.sys.NET;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 public class netadr_t {
 
     public int type;
 
-    public int port;
+    @Unsigned public int port;
 
-    public byte ip[];
+    @Unsigned public byte ip[];
 
     public netadr_t() {
         this.type = Defines.NA_LOOPBACK;

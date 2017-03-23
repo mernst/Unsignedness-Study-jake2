@@ -31,6 +31,8 @@ import jake2.game.*;
 import jake2.qcommon.*;
 import jake2.util.Math3D;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 /**
  * CL_ents
  */
@@ -53,8 +55,8 @@ public class CL_ents {
 	 * 
 	 * Returns the entity number and the header bits =================
 	 */
-	public static int ParseEntityBits(int bits[]) {
-		int b, total;
+	public static int ParseEntityBits(@Unsigned int bits[]) {
+		@Unsigned int b, total;
 		int i;
 		int number;
 
@@ -604,7 +606,7 @@ public class CL_ents {
 		centity_t cent;
 		int autoanim;
 		clientinfo_t ci;
-		int effects, renderfx;
+		@Unsigned int effects, renderfx;
 
 		// bonus items rotate at a fixed rate
 		autorotate = Math3D.anglemod(Globals.cl.time / 10);
@@ -1109,7 +1111,7 @@ public class CL_ents {
 		if ((Globals.cl_predict.value != 0) && 0 == (Globals.cl.frame.playerstate.pmove.pm_flags & pmove_t.PMF_NO_PREDICTION)) { // use
 																																 // predicted
 																																 // values
-			int delta;
+			@Unsigned int delta;
 
 			backlerp = 1.0f - lerp;
 			for (i = 0; i < 3; i++) {

@@ -32,6 +32,7 @@ import jake2.qcommon.*;
 import jake2.sound.S;
 import jake2.sys.Timer;
 import jake2.util.Vargs;
+import org.checkerframework.checker.signedness.qual.Unsigned;
 
 import java.awt.Dimension;
 import java.nio.ByteBuffer;
@@ -1374,8 +1375,8 @@ public final class SCR extends Globals {
         
         int width;
         int height;
-        byte[] pic;
-        byte[] pic_pending;
+        @Unsigned byte[] pic;
+        @Unsigned byte[] pic_pending;
         // order 1 huffman stuff
         int[] hnodes1; // [256][256][2];
         int[] numhnodes1 = new int[256];
@@ -1389,7 +1390,7 @@ public final class SCR extends Globals {
     /**
      * LoadPCX
      */
-    static int LoadPCX(String filename, byte[] palette, cinematics_t cin) {
+    static int LoadPCX(String filename, @Unsigned byte[] palette, cinematics_t cin) {
         qfiles.pcx_t pcx;
 
         // load the file
@@ -1415,7 +1416,7 @@ public final class SCR extends Globals {
         int width = pcx.xmax - pcx.xmin + 1;
         int height = pcx.ymax - pcx.ymin + 1;
 
-        byte[] pix = new byte[width * height];
+        @Unsigned byte[] pix = new byte[width * height];
 
         if (palette != null) {
             raw.position(raw.limit() - 768);
@@ -1536,7 +1537,7 @@ public final class SCR extends Globals {
      */
     private static void Huff1TableInit() {
         int[] node;
-        byte[] counts = new byte[256];
+        @Unsigned byte[] counts = new byte[256];
         int numhnodes;
         
         cin.hnodes1 = new int[256 * 256 * 2];
@@ -1692,7 +1693,7 @@ public final class SCR extends Globals {
     /**
      * ReadNextFrame
      */ 
-   static byte[] ReadNextFrame() {
+   @Unsigned static byte[] ReadNextFrame() {
     
         ByteBuffer file = cl.cinematic_file;
 
@@ -1726,7 +1727,7 @@ public final class SCR extends Globals {
         // skip the sound samples
         file.position(file.position() + count * cin.s_width * cin.s_channels);
         
-        byte[] pic = Huff1Decompress(compressed, size);
+        @Unsigned byte[] pic = Huff1Decompress(compressed, size);
         cl.cinematicframe++;
 
         return pic;

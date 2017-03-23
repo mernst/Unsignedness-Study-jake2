@@ -27,6 +27,7 @@ package jake2.qcommon;
 
 import jake2.Defines;
 import jake2.util.Lib;
+import org.checkerframework.checker.signedness.qual.Unsigned;
 
 /**
  * SZ
@@ -39,7 +40,7 @@ public final class SZ {
 
 	//===========================================================================
 	
-	public static void Init(sizebuf_t buf, byte data[], int length) {
+	public static void Init(sizebuf_t buf, @Unsigned byte data[], int length) {
 	  // TODO check this. cwei
 	  buf.readcount = 0;
 

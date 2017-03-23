@@ -32,6 +32,7 @@ import jake2.qcommon.xcommand_t;
 import jake2.render.opengl.JoglDriver;
 import jake2.sys.JOGLKBD;
 import jake2.sys.KBD;
+import org.checkerframework.checker.signedness.qual.Unsigned;
 
 import java.awt.Dimension;
 
@@ -255,14 +256,14 @@ final class JoglRenderer extends JoglDriver implements refexport_t, Ref {
 	/** 
 	 * @see jake2.client.refexport_t#DrawStretchRaw(int, int, int, int, int, int, byte[])
 	 */
-	public void DrawStretchRaw(int x, int y, int w, int h, int cols, int rows, byte[] data) {
+	public void DrawStretchRaw(int x, int y, int w, int h, int cols, int rows, @Unsigned byte[] data) {
 		impl.Draw_StretchRaw(x, y, w, h, cols, rows, data);
 	}
 
 	/** 
 	 * @see jake2.client.refexport_t#CinematicSetPalette(byte[])
 	 */
-	public void CinematicSetPalette(byte[] palette) {
+	public void CinematicSetPalette(@Unsigned byte[] palette) {
 		impl.R_SetPalette(palette);
 	}
 

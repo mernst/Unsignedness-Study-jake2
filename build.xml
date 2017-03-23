@@ -62,7 +62,7 @@
 		<echo message="clean        		delete classfiles keep distribution files"/>
 		<echo message="distclean    		delete all generated files"/>
 		<echo message="jar          		build only dist/lib/jake2.jar"/>
-		<echo message="check-unsignedness	build and run unsignedness checker"/>
+		<echo message="check-signedness	build and run signedness checker"/>
 		<echo message=""/>
 	</target>
 
@@ -81,12 +81,12 @@
 		</javac>
 	</target>
 
-	<target name="check-unsignedness"
+	<target name="check-signedness"
           	description="Check for violations of unsigned representation"
           	depends="clean,init">
     		<!-- use jsr308.javac instead of javac -->
     		<jsr308.javac destdir="${build}" optimize="off" debug="on">
-      			<compilerarg line="-processor unsignedness -AprintErrorStack"/>
+      			<compilerarg line="-processor signedness -AprintErrorStack"/>
       			<!-- optional, to not check uses of library methods:
                    		<compilerarg value="-AskipUses=^(java\.awt\.|javax\.swing\.)"/>
       			-->

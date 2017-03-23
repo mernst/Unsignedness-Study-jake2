@@ -40,6 +40,8 @@ import java.io.RandomAccessFile;
 import java.util.Arrays;
 import java.util.Comparator;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 /**
  * Menu
  * 
@@ -116,7 +118,7 @@ public final class Menu extends Key {
 
         int localdata[] = { 0, 0, 0, 0 };
 
-        int flags;
+        @Unsigned int flags;
 
         int n = -1; //position in an array.
 
@@ -4672,7 +4674,7 @@ public final class Menu extends Key {
     }
 
     public static void Menu_DrawString(int x, int y, String string) {
-        int i;
+        @Unsigned int i;
 
         for (i = 0; i < string.length(); i++) {
             re.DrawChar((x + i * 8), y, string.charAt(i));
@@ -4680,7 +4682,7 @@ public final class Menu extends Key {
     }
 
     public static void Menu_DrawStringDark(int x, int y, String string) {
-        int i;
+        @Unsigned int i;
 
         for (i = 0; i < string.length(); i++) {
             re.DrawChar((x + i * 8), y, string.charAt(i) + 128);
@@ -4688,7 +4690,7 @@ public final class Menu extends Key {
     }
 
     public static void Menu_DrawStringR2L(int x, int y, String string) {
-        int i;
+        @Unsigned int i;
 
         int l = string.length();
         for (i = 0; i < l; i++) {
@@ -4697,7 +4699,7 @@ public final class Menu extends Key {
     }
 
     public static void Menu_DrawStringR2LDark(int x, int y, String string) {
-        int i;
+        @Unsigned int i;
 
         int l = string.length();
         for (i = 0; i < l; i++) {

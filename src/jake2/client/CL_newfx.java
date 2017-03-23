@@ -32,6 +32,8 @@ import jake2.Globals;
 import jake2.util.Lib;
 import jake2.util.Math3D;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 /**
  * CL_newfx
  */
@@ -757,7 +759,7 @@ public class CL_newfx {
      * 
      * Wall impact puffs (Green) ===============
      */
-    static void BlasterParticles2(float[] org, float[] dir, long color) {
+    static void BlasterParticles2(float[] org, float[] dir, @Unsigned int color) {
         int i, j;
         cparticle_t p;
         float d;

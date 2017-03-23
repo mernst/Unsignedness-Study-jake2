@@ -35,6 +35,8 @@ import java.io.FilenameFilter;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 /**
  * Sys
  */
@@ -173,7 +175,7 @@ public final class Sys extends Defines {
             return regexpr;
         }
 
-        boolean CompareAttributes(File dir, int musthave, int canthave) {
+        boolean CompareAttributes(File dir, @Unsigned int musthave, @Unsigned int canthave) {
             // . and .. never match
             String name = dir.getName();
 
@@ -197,7 +199,7 @@ public final class Sys extends Defines {
     static String findpattern;
 
     // ok.
-    public static File FindFirst(String path, int musthave, int canthave) {
+    public static File FindFirst(String path, @Unsigned int musthave, @Unsigned int canthave) {
 
         if (fdir != null)
             Sys.Error("Sys_BeginFind without close");

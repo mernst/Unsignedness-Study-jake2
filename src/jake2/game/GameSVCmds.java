@@ -31,6 +31,8 @@ import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.util.StringTokenizer;
 
+import org.checkerframework.checker.signedness.qual.*;
+
 public class GameSVCmds {
 
     /**
@@ -67,9 +69,9 @@ public class GameSVCmds {
      */
 
     public static class ipfilter_t {
-        int mask;
+        @Unsigned int mask;
 
-        int compare;
+        @Unsigned int compare;
     };
 
     public static void Svcmd_Test_f() {
@@ -91,8 +93,8 @@ public class GameSVCmds {
      */
     static boolean StringToFilter(String s, GameSVCmds.ipfilter_t f) {
 
-    	byte b[] = { 0, 0, 0, 0 };
-        byte m[] = { 0, 0, 0, 0 };
+    	@Unsigned byte b[] = { 0, 0, 0, 0 };
+        @Unsigned byte m[] = { 0, 0, 0, 0 };
 
         try {
             StringTokenizer tk = new StringTokenizer(s, ". ");
@@ -119,8 +121,8 @@ public class GameSVCmds {
      */
     static boolean SV_FilterPacket(String from) {
         int i;
-        int in;
-        int m[] = { 0, 0, 0, 0 };
+        @Unsigned int in;
+        @Unsigned int m[] = { 0, 0, 0, 0 };
 
         int p = 0;
         char c;
@@ -214,7 +216,7 @@ public class GameSVCmds {
      */
     static void SVCmd_ListIP_f() {
         int i;
-        byte b[];
+        @Unsigned byte b[];
 
         GameBase.gi.cprintf(null, Defines.PRINT_HIGH, "Filter list:\n");
         for (i = 0; i < numipfilters; i++) {
@@ -233,7 +235,7 @@ public class GameSVCmds {
         RandomAccessFile f;
         //char name[MAX_OSPATH];
         String name;
-        byte b[];
+        @Unsigned byte b[];
 
         int i;
         cvar_t game;

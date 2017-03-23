@@ -23,13 +23,15 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 package jake2.game;
 
 
+import org.checkerframework.checker.signedness.qual.Unsigned;
+
 public class usercmd_t implements Cloneable {
-	public byte msec;
-	public byte buttons;
+	@Unsigned public byte msec;
+	@Unsigned public byte buttons;
 	public short angles[]= new short[3];
 	public short forwardmove, sidemove, upmove;
-	public byte impulse; // remove?
-	public byte lightlevel; // light level the player is standing on
+	@Unsigned public byte impulse; // remove?
+	@Unsigned public byte lightlevel; // light level the player is standing on
 
 	public void clear() {
 		forwardmove= sidemove= upmove= msec= buttons= impulse= lightlevel= 0;

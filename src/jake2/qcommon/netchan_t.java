@@ -23,6 +23,7 @@
 package jake2.qcommon;
 
 import jake2.*;
+import org.checkerframework.checker.signedness.qual.Unsigned;
 
 public class netchan_t {
 
@@ -60,14 +61,14 @@ public class netchan_t {
     public sizebuf_t message = new sizebuf_t(); // writing buffer to send to
                                                 // server
 
-    public byte message_buf[] = new byte[Defines.MAX_MSGLEN - 16]; // leave
+    @Unsigned public byte message_buf[] = new byte[Defines.MAX_MSGLEN - 16]; // leave
                                                                    // space for
                                                                    // header
 
     //	   message is copied to this buffer when it is first transfered
     public int reliable_length;
 
-    public byte reliable_buf[] = new byte[Defines.MAX_MSGLEN - 16]; // unpcked
+    @Unsigned public byte reliable_buf[] = new byte[Defines.MAX_MSGLEN - 16]; // unpcked
                                                                     // reliable
                                                                     // message
 
