@@ -27,6 +27,7 @@ import jake2.Defines;
 import java.nio.ByteBuffer;
 
 import org.checkerframework.checker.signedness.qual.*;
+import org.checkerframework.checker.signedness.SignednessUtil;
 
 public class medge_t {
 
@@ -40,7 +41,7 @@ public class medge_t {
     @Unsigned public int cachededgeoffset;
 
     public medge_t(ByteBuffer b) {
-        v[0] = b.getShort();
-        v[1] = b.getShort();
+        v[0] = SignednessUtil.getUnsignedShort(b);
+        v[1] = SignednessUtil.getUnsignedShort(b);
     }
 }

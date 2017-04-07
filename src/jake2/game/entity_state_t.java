@@ -28,6 +28,7 @@ import jake2.util.QuakeFile;
 import java.io.IOException;
 
 import org.checkerframework.checker.signedness.qual.*;
+import org.checkerframework.checker.signedness.SignednessUtil;
 
 public class entity_state_t implements Cloneable
 {
@@ -84,7 +85,7 @@ public class entity_state_t implements Cloneable
 		f.writeInt(frame);	
 		f.writeInt(skinnum);
 		
-		f.writeInt(effects);
+		SignednessUtil.writeUnsignedInt(f, effects);
 		f.writeInt(renderfx);
 		f.writeInt(solid);
 		
@@ -110,7 +111,7 @@ public class entity_state_t implements Cloneable
 		frame = f.readInt();	
 		skinnum = f.readInt();
 		
-		effects = f.readInt();
+		effects = SignednessUtil.readUnsignedInt(f);
 		renderfx = f.readInt();
 		solid = f.readInt();
 		

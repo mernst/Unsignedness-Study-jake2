@@ -81,7 +81,7 @@ public interface refexport_t {
 
 	void DrawGetPicSize(Dimension dim /* int *w, *h */, String name);
 	// will return 0 0 if not found
-	void DrawPic(int x, int y, String name);
+	void DrawPic(@Unsigned int x, @Unsigned int y, String name);
 	void DrawStretchPic(int x, int y, int w, int h, String name);
 	void DrawChar(int x, int y, int num); // num is 8 bit ASCII 
 	void DrawTileClear(int x, int y, int w, int h, String name);

@@ -380,6 +380,17 @@ public final class FS extends Globals {
     }
 
     /*
+     * LoadFileUnsigned
+     *
+     * Filename are reletive to the quake search path a null buffer will just
+     * return the file content as byte[]
+     */
+    @SuppressWarnings("signedness")
+    public @Unsigned static byte[] LoadFileUnsigned(String path) {
+        return LoadFile(path);
+    }
+
+    /*
      * LoadMappedFile
      * 
      * Filename are reletive to the quake search path a null buffer will just
@@ -492,6 +503,14 @@ public final class FS extends Globals {
      */
     public static void FreeFile(byte[] buffer) {
         buffer = null;
+    }
+
+    /*
+     * FreeFileUnsigned
+     */
+    @SuppressWarnings("signedness")
+    public static void FreeFileUnsigned(@Unsigned byte[] buffer) {
+        FreeFile(buffer);
     }
 
     static final int IDPAKHEADER = (('K' << 24) + ('C' << 16) + ('A' << 8) + 'P');

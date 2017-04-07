@@ -40,6 +40,7 @@ import java.io.RandomAccessFile;
 import java.util.Arrays;
 import java.util.Comparator;
 
+import org.checkerframework.checker.signedness.SignednessUtil;
 import org.checkerframework.checker.signedness.qual.*;
 
 /**
@@ -179,7 +180,7 @@ public final class Menu extends Key {
         Dimension dim = new Dimension();
         Globals.re.DrawGetPicSize(dim, name);
 
-        Globals.re.DrawPic(viddef.getWidth() / 2 - dim.width / 2,
+        Globals.re.DrawPic(viddef.getWidth() / 2 - SignednessUtil.dimensionUnsignedWidth(dim) / 2,
                 viddef.getHeight() / 2 - 110, name);
     }
 
@@ -327,9 +328,9 @@ public final class Menu extends Key {
      * Draws one solid graphics character cx and cy are in 320*240 coordinates,
      * and will be centered on higher res screens. ================
      */
-    public static void DrawCharacter(int cx, int cy, int num) {
-        re.DrawChar(cx + ((viddef.getWidth() - 320) >> 1), cy
-                + ((viddef.getHeight() - 240) >> 1), num);
+    public static void DrawCharacter(@Unsigned int cx, @Unsigned int cy, int num) {
+        re.DrawChar(cx + ((viddef.getWidth() - 320) >>> 1), cy
+                + ((viddef.getHeight() - 240) >>> 1), num);
     }
 
     public static void Print(int cx, int cy, String str) {
@@ -349,9 +350,9 @@ public final class Menu extends Key {
         }
     }
 
-    public static void DrawPic(int x, int y, String pic) {
-        re.DrawPic(x + ((viddef.getWidth() - 320) >> 1), y
-                + ((viddef.getHeight() - 240) >> 1), pic);
+    public static void DrawPic(@Unsigned int x, @Unsigned int y, String pic) {
+        re.DrawPic(x + ((viddef.getWidth() - 320) >>> 1), y
+                + ((viddef.getHeight() - 240) >>> 1), pic);
     }
 
     /*
@@ -437,9 +438,9 @@ public final class Menu extends Key {
     static void Main_Draw() {
         int i;
         int w, h;
-        int ystart;
-        int xoffset;
-        int widest = -1;
+        @Unsigned int ystart;
+        @Unsigned int xoffset;
+        @Unsigned int widest = 0;
         int totalheight = 0;
         String litname;
         String[] names = { "m_main_game", "m_main_multiplayer",
@@ -456,7 +457,7 @@ public final class Menu extends Key {
             totalheight += (h + 12);
         }
 
-        ystart = (Globals.viddef.getHeight() / 2 - 110);
+        ystart = (Integer.divideUnsigned(Globals.viddef.getHeight(), 2) - 110);
         xoffset = (Globals.viddef.getWidth() - widest + 70) / 2;
 
         for (i = 0; i < names.length; i++) {
@@ -588,7 +589,7 @@ public final class Menu extends Key {
     }
 
     static void Multiplayer_MenuInit() {
-        s_multiplayer_menu.x = (int) (viddef.getWidth() * 0.50f - 64);
+        s_multiplayer_menu.x = (int) (((double) viddef.getWidth()) * 0.50f - 64);
         s_multiplayer_menu.nitems = 0;
 
         s_join_network_server_action.type = MTYPE_ACTION;
@@ -1448,8 +1449,8 @@ public final class Menu extends Key {
         /*
          * * configure controls menu and menu items
          */
-        s_options_menu.x = viddef.getWidth() / 2;
-        s_options_menu.y = viddef.getHeight() / 2 - 58;
+        s_options_menu.x = Integer.divideUnsigned(viddef.getWidth(), 2);
+        s_options_menu.y = Integer.divideUnsigned(viddef.getHeight(), 2) - 58;
         s_options_menu.nitems = 0;
 
         s_options_sfxvolume_slider.type = MTYPE_SLIDER;
