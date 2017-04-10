@@ -26,6 +26,7 @@ package jake2.util;
 import jake2.Globals;
 import jake2.qcommon.Com;
 import jake2.qcommon.FS;
+import org.checkerframework.checker.signedness.qual.Unsigned;
 
 import java.io.*;
 import java.nio.*;
@@ -313,6 +314,16 @@ public class Lib {
             return null;
         }
     }
+
+	/**
+	 * convert a java string to @Unsigned byte[] with 8bit latin 1
+	 *
+	 * avoid String.getBytes() because it is using system specific character encoding.
+	 */
+	@SuppressWarnings("signedness")
+	public @Unsigned static byte[] stringToUnsignedBytes(String value) {
+		return stringToBytes(value);
+	}
     
     /** 
      * convert a byte[] with 8bit latin 1 to java string
@@ -346,6 +357,11 @@ public class Lib {
 	    int i;
 	    for (i = offset; (i - offset) < maxLenght && old[i] != 0; i++);
 		return new String(old, offset, i - offset);
+	}
+
+	/** Helper method that savely handles the null termination of old C String unsigned data. */
+	public static String CtoJavaUnsigned(@Unsigned byte[] old, int offset, int maxLenght) {
+		return CtoJava(old, offset, maxLenght);
 	}
 	
 	

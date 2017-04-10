@@ -43,7 +43,7 @@ public final class sizebuf_t {
 	public void clear()
 	{
 		if (data!=null)		
-			Arrays.fill(data,(byte)0);
+			Arrays.fill(data,(@Unsigned byte)0);
 		cursize = 0;
 		overflowed = false;
 	}

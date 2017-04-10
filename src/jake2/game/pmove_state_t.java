@@ -24,7 +24,8 @@ package jake2.game;
 
 import jake2.qcommon.Com;
 import jake2.util.Math3D;
-import org.checkerframework.checker.signedness.qual.Unsigned;
+import org.checkerframework.checker.signedness.qual.*;
+import org.checkerframework.checker.signedness.SignednessUtil;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -98,8 +99,8 @@ public class pmove_state_t {
 		velocity[1] = f.readShort();
 		velocity[2] = f.readShort();
 
-		pm_flags = f.readByte();
-		pm_time = f.readByte();
+		pm_flags = SignednessUtil.readUnsignedByte(f);
+		pm_time = SignednessUtil.readUnsignedByte(f);
 		gravity = f.readShort();
 
 		f.readShort();
@@ -123,8 +124,8 @@ public class pmove_state_t {
 		f.writeShort(velocity[1]);
 		f.writeShort(velocity[2]);
 
-		f.writeByte(pm_flags);
-		f.writeByte(pm_time);
+		SignednessUtil.writeUnsignedByte(f, pm_flags);
+		SignednessUtil.writeUnsignedByte(f, pm_time);
 		f.writeShort(gravity);
 
 		f.writeShort(0);

@@ -39,7 +39,7 @@ public class viddef_t {
      * @param height
      *                the visible render screen height.
      */
-    public synchronized void setSize(int width, int height) {
+    public synchronized void setSize(@Unsigned int width, @Unsigned int height) {
 	newWidth = width;
 	newHeight = height;
     }

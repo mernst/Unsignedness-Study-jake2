@@ -40,6 +40,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
 import org.checkerframework.checker.signedness.qual.*;
+import org.checkerframework.checker.signedness.SignednessUtil;
 
 /**
  * CL
@@ -126,7 +127,7 @@ public final class CL {
         public void execute() {
             try {
                 String name;
-                byte buf_data[] = new byte[Defines.MAX_MSGLEN];
+                @Unsigned byte buf_data[] = new byte[Defines.MAX_MSGLEN];
                 sizebuf_t buf = new sizebuf_t();
                 int i;
                 entity_state_t ent;
@@ -186,8 +187,7 @@ public final class CL {
                                 + 32 > buf.maxsize) { 
                             // write it out
                             Globals.cls.demofile.writeInt(EndianHandler.swapInt(buf.cursize));
-                            Globals.cls.demofile
-                                    .write(buf.data, 0, buf.cursize);
+                            SignednessUtil.writeUnsigned(Globals.cls.demofile, buf.data, 0, buf.cursize);
                             buf.cursize = 0;
                         }
 
@@ -207,7 +207,7 @@ public final class CL {
 
                     if (buf.cursize + 64 > buf.maxsize) { // write it out
                         Globals.cls.demofile.writeInt(EndianHandler.swapInt(buf.cursize));
-                        Globals.cls.demofile.write(buf.data, 0, buf.cursize);
+                        SignednessUtil.writeUnsigned(Globals.cls.demofile, buf.data, 0, buf.cursize);
                         buf.cursize = 0;
                     }
 
@@ -221,7 +221,7 @@ public final class CL {
 
                 // write it to the demo file
                 Globals.cls.demofile.writeInt(EndianHandler.swapInt(buf.cursize));
-                Globals.cls.demofile.write(buf.data, 0, buf.cursize);
+                SignednessUtil.writeUnsigned(Globals.cls.demofile, buf.data, 0, buf.cursize);
                 // the rest of the demo file will be individual frames
 
             } catch (IOException e) {
@@ -589,7 +589,7 @@ public final class CL {
 
         try {
             Globals.cls.demofile.writeInt(EndianHandler.swapInt(swlen));
-            Globals.cls.demofile.write(Globals.net_message.data, 8, swlen);
+            SignednessUtil.writeUnsigned(Globals.cls.demofile, Globals.net_message.data, 8, swlen);
         } catch (IOException e) {
         }
 
@@ -721,9 +721,9 @@ public final class CL {
 
         // send a disconnect message to the server
         fin = (char) Defines.clc_stringcmd + "disconnect";
-        Netchan.Transmit(Globals.cls.netchan, fin.length(), Lib.stringToBytes(fin));
-        Netchan.Transmit(Globals.cls.netchan, fin.length(), Lib.stringToBytes(fin));
-        Netchan.Transmit(Globals.cls.netchan, fin.length(), Lib.stringToBytes(fin));
+        Netchan.Transmit(Globals.cls.netchan, fin.length(), Lib.stringToUnsignedBytes(fin));
+        Netchan.Transmit(Globals.cls.netchan, fin.length(), Lib.stringToUnsignedBytes(fin));
+        Netchan.Transmit(Globals.cls.netchan, fin.length(), Lib.stringToUnsignedBytes(fin));
 
         ClearState();
 
@@ -965,26 +965,26 @@ public final class CL {
                     if (CL.precache_model == null) {
 
                         CL.precache_model = FS
-                                .LoadFile(Globals.cl.configstrings[CL.precache_check]);
+                                .LoadFileUnsigned(Globals.cl.configstrings[CL.precache_check]);
                         if (CL.precache_model == null) {
                             CL.precache_model_skin = 0;
                             CL.precache_check++;
                             continue; // couldn't load it
                         }
-                        ByteBuffer bb = ByteBuffer.wrap(CL.precache_model);
+                        ByteBuffer bb = SignednessUtil.wrapUnsigned(CL.precache_model);
                         bb.order(ByteOrder.LITTLE_ENDIAN);
 
                         int header = bb.getInt();
 
                         if (header != qfiles.IDALIASHEADER) {
                             // not an alias model
-                            FS.FreeFile(CL.precache_model);
+                            FS.FreeFileUnsigned(CL.precache_model);
                             CL.precache_model = null;
                             CL.precache_model_skin = 0;
                             CL.precache_check++;
                             continue;
                         }
-                        pheader = new qfiles.dmdl_t(ByteBuffer.wrap(
+                        pheader = new qfiles.dmdl_t(SignednessUtil.wrapUnsigned(
                                 CL.precache_model).order(
                                 ByteOrder.LITTLE_ENDIAN));
                         if (pheader.version != Defines.ALIAS_VERSION) {
@@ -994,7 +994,7 @@ public final class CL {
                         }
                     }
 
-                    pheader = new qfiles.dmdl_t(ByteBuffer.wrap(
+                    pheader = new qfiles.dmdl_t(SignednessUtil.wrapUnsigned(
                             CL.precache_model).order(ByteOrder.LITTLE_ENDIAN));
 
                     int num_skins = pheader.num_skins;
@@ -1003,7 +1003,7 @@ public final class CL {
                         //Com.Printf("critical code section because of endian
                         // mess!\n");
 
-                        String name = Lib.CtoJava(CL.precache_model,
+                        String name = Lib.CtoJavaUnsigned(CL.precache_model,
                                 pheader.ofs_skins
                                         + (CL.precache_model_skin - 1)
                                         * Defines.MAX_SKINNAME,
@@ -1016,7 +1016,7 @@ public final class CL {
                         CL.precache_model_skin++;
                     }
                     if (CL.precache_model != null) {
-                        FS.FreeFile(CL.precache_model);
+                        FS.FreeFileUnsigned(CL.precache_model);
                         CL.precache_model = null;
                     }
                     CL.precache_model_skin = 0;
@@ -1164,7 +1164,7 @@ public final class CL {
         if (CL.precache_check == ENV_CNT) {
             CL.precache_check = ENV_CNT + 1;
 
-            int iw[] = { map_checksum };
+            @Unsigned int iw[] = { map_checksum };
 
             CM.CM_LoadMap(Globals.cl.configstrings[Defines.CS_MODELS + 1],
                     true, iw);
